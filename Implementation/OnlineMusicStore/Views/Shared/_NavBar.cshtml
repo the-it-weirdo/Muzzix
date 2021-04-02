@@ -1,6 +1,6 @@
 @using OnlineMusicStore.Helpers;
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Muzzix</a>
+    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Muzzix</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
         aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -26,33 +26,12 @@
                         <a class="dropdown-item" href="#">Separated link</a> *@
                 </div>
             </li>
-            <li class="@Html.IsSelected("Home", "MyCart", "nav-item active", "nav-item")">
-                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="MyCart">My Cart</a>
+            <li class="@Html.IsSelected("User", "Cart", "nav-item active", "nav-item")">
+                <a class="nav-link" asp-area="" asp-controller="User" asp-action="Cart">My Cart</a>
             </li>
             <li class="@Html.IsSelected("Home", "Contact", "nav-item active", "nav-item")">
-                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="">Contact Us</a>
+                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact">Contact Us</a>
             </li>
-            @* <li class="@Html.IsSelected("Home", "PhotoGallery", "nav-item active", "nav-item")">
-                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="PhotoGallery">Photo Gallery</a>
-                </li>
-                <li class="@Html.IsSelected("Home", "Registration", "nav-item active", "nav-item")">
-                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Registration">Registration</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="#">Home
-                <span class="sr-only">(current)</span>
-                </a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
-                </li>
-            *@
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="text" placeholder="Search">

@@ -28,9 +28,8 @@ _Commands for setup_
 
 ```
 git clone https://github.com/the-it-weirdo/OnlineMusicStore.git
-cd OnlineMusicStore
-cd OnlineMusicStore\Implementation\OnlineMusicStore
-dotnet restore
+cd OnlineMusicStore/Implementation/OnlineMusicStore
+dotnet restore # optional. If 'dotnet run' fails, use this command.
 dotnet run
 ```
 

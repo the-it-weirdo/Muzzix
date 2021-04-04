@@ -12,6 +12,8 @@ using OnlineMusicStore.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace OnlineMusicStore
 {
@@ -85,6 +87,20 @@ namespace OnlineMusicStore
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            // app.UseStaticFiles(new StaticFileOptions
+            // {
+            //     FileProvider = new PhysicalFileProvider(
+            // Path.Combine(env.ContentRootPath, "static")),
+            //     RequestPath = "/static"
+            // });
+
+            // app.UseStaticFiles(new StaticFileOptions
+            // {
+            //     FileProvider = new PhysicalFileProvider(
+            // Path.Combine(env.ContentRootPath, "static")),
+            //     RequestPath = "/*/static"
+            // });
 
             app.UseRouting();
 

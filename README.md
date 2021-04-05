@@ -34,3 +34,7 @@ dotnet run
 ```
 
 **N.B.: If you want to edit, please use ```vscode .``` inplace of ```dotnet run``` as the last command.**
+
+---
+### Collaborators
+- Ayushi Bhowmik

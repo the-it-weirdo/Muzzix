@@ -38,4 +38,4 @@ dotnet run
 ---
 ### Collaborators
 - [Ayushi Bhowmik](https://github.com/ayushibhowmik)
-- Debaleen Das Spandan
+- [Debaleen Das Spandan](https://github.com/the-it-weirdo)

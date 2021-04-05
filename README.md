@@ -37,4 +37,4 @@ dotnet run
 
 ---
 ### Collaborators
-- Ayushi Bhowmik
+- [Ayushi Bhowmik](https://github.com/ayushibhowmik)

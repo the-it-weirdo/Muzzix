@@ -48,7 +48,7 @@ namespace OnlineMusicStore.Areas.Identity.Pages.Account
             [Required]
             [Display(Name = "User Name")]
             [MinLength(3)]
-            public string UserName {get; set;}
+            public string UserName { get; set; }
 
             [Required]
             [EmailAddress]
@@ -69,7 +69,7 @@ namespace OnlineMusicStore.Areas.Identity.Pages.Account
             [Required]
             [Display(Name = "Phone Number")]
             [Phone]
-            public string PhoneNumber {get;set;}
+            public string PhoneNumber { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -90,6 +90,7 @@ namespace OnlineMusicStore.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
+                    // Since we aren't implementing email verification
                     // var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     // code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     // var callbackUrl = Url.Page(

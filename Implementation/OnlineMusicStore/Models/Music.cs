@@ -26,9 +26,9 @@ namespace OnlineMusicStore.Models
         public Genre Genre { get; set; }
 
         [Display(Name = "Album")]
-        public int AlbumId { get; set; }
+        public int? AlbumId { get; set; }
 
-        public Album Album { get; set; }
+        public Album? Album { get; set; }
 
         public virtual ICollection<Artist> Artists { get; private set; }
 
@@ -37,7 +37,7 @@ namespace OnlineMusicStore.Models
             Artists = new HashSet<Artist>();
         }
 
-        public void AddGenre(Artist artist)
+        public void AddArtist(Artist artist)
         {
             Artists.Add(artist);
         }

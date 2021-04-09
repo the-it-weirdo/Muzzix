@@ -1,0 +1,37 @@
+@model IEnumerable<OnlineMusicStore.Models.Music>
+@{
+    ViewData["Title"] = "Music";
+}
+
+<section>
+    <h1 class="display-4">Music</h1>
+    <p><a asp-controller="Music" asp-action="CreateNew">Add New Music</a></p>
+    @if (Model.Any())
+    {
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var music in Model)
+                {
+                    <tr>
+                        <td>@music.Name</td>
+                        <td>
+                            <a asp-controller="Music" asp-action="Detail" asp-route-id="@music.Id">Details</a> |
+                            <a asp-controller="Music" asp-action="Edit" asp-route-id="@music.Id">Edit</a> |
+                            <a asp-controller="Music" asp-action="Delete" asp-route-id="@music.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p class="text-error">No musics available. Add a music to show.</p>
+    }
+</section>

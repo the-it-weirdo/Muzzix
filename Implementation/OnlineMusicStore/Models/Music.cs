@@ -26,20 +26,44 @@ namespace OnlineMusicStore.Models
         public Genre Genre { get; set; }
 
         [Display(Name = "Album")]
-        public int AlbumId { get; set; }
+        public int? AlbumId { get; set; }
 
-        public Album Album { get; set; }
+        public Album? Album { get; set; }
 
-        public virtual ICollection<Artist> Artists { get; private set; }
+        public virtual ICollection<Artist> Artists { get; set; }
 
-        public Music()
+        public bool IsRecentlyAdded()
         {
-            Artists = new HashSet<Artist>();
+            return DateAdded.HasValue ? CheckRecent(DateAdded.Value) : false;
         }
 
-        public void AddGenre(Artist artist)
+        public bool IsRecentlyReleased()
         {
-            Artists.Add(artist);
+            return CheckRecent(DateReleased);
         }
+
+        private bool CheckRecent(DateTime initialTime)
+        {
+            if ((DateTime.Now - initialTime).TotalDays <= 7)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        // public Music()
+        // {
+        //     // Artists = new HashSet<Artist>();
+        // }
+
+        // // public void AddArtist(Artist artist)
+        // // {
+        // //     Artists.Add(artist);
+        // // }
+
+        // // public void RemoveArtist(Artist artist)
+        // // {
+        // //     Artists.Remove(artist);
+        // // }
     }
 }

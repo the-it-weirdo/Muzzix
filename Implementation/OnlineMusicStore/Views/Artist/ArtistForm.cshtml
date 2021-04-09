@@ -1,0 +1,40 @@
+@model OnlineMusicStore.ViewModels.ArtistFormViewModel
+@{
+    ViewData["Title"] = "Artists";
+}
+
+<h1>@Model.Title</h1>
+<section class="row">
+    <div class="col-md-4">
+        <form asp-controller="Artist" asp-action="Save" method="POST">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rating" class="form-label"></label>
+                <input asp-for="Rating" class="form-range" type="range" step="0.1" min="0" max="5" onchange="onRatingChange()"/>
+                <span id="range-value" class="text-italic"></span>
+                <span asp-validation-for="Rating" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+            @* <div class="form-group">
+                <label asp-for="Input.Email"></label>
+                <input asp-for="Input.Email" class="form-control" />
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div> *@
+        </form>
+        <a asp-controller="Artist" asp-action="Index">Go back</a>
+    </div>
+</section>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    await Html.RenderPartialAsync("ArtistFormScript");}
+}

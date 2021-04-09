@@ -1,0 +1,38 @@
+@model IEnumerable<OnlineMusicStore.Models.Artist>
+@{
+    ViewData["Title"] = "Artists";
+}
+
+<section>
+    <h1 class="display-4">Artists</h1>
+    <p><a asp-controller="Artist" asp-action="CreateNew">Add New Artist</a></p>
+    @if (Model.Any())
+    {
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Rating</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var artist in Model)
+                {
+                    <tr>
+                        <td>@artist.Name</td>
+                        <td>@artist.Rating</td>
+                        <td>
+                            <a asp-controller="Artist" asp-action="Edit" asp-route-id="@artist.Id">Edit</a> |
+                            <a asp-controller="Artist" asp-action="Delete" asp-route-id="@artist.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p class="text-error">No artists available. Add an artist to show.</p>
+    }
+</section>

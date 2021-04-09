@@ -1,0 +1,28 @@
+@model OnlineMusicStore.ViewModels.GenreFormViewModel
+@{
+    ViewData["Title"] = "Genres";
+}
+
+<h1>@Model.Title</h1>
+<section class="row">
+    <div class="col-md-4">
+        <form asp-controller="Genre" asp-action="Save" method="POST">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+        <a asp-controller="Genre" asp-action="Index">Go back</a>
+    </div>
+</section>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

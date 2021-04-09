@@ -1,0 +1,36 @@
+@model IEnumerable<OnlineMusicStore.Models.Genre>
+@{
+    ViewData["Title"] = "Genres";
+}
+
+<section>
+    <h1 class="display-4">Genres</h1>
+    <p><a asp-controller="Genre" asp-action="CreateNew">Add New Genre</a></p>
+    @if (Model.Any())
+    {
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var Genre in Model)
+                {
+                    <tr>
+                        <td>@Genre.Name</td>
+                        <td>
+                            <a asp-controller="Genre" asp-action="Edit" asp-route-id="@Genre.Id">Edit</a> |
+                            <a asp-controller="Genre" asp-action="Delete" asp-route-id="@Genre.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p class="text-error">No Genres available. Add a Genre to show.</p>
+    }
+</section>

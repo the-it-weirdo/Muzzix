@@ -4,31 +4,83 @@
 }
 
 <section>
-    <h1 class="display-4">Music Details</h1>
-    <h2 class="display-3">@Model.Name</h2>
-    <hr />
-    <p>
-        <span>Lanuage: @Model.Language</span>
-        <span>Date Released: @Model.DateReleased</span>
-        <span>Date Added: @Model.DateAdded</span>
-        <span>Genre: @Model.Genre.Name</span>
-        <span>Album: @Model.Album?.Name</span>
-        <span>Artists:
-            @foreach (var artist in Model.Artists)
-            {
-                <span>@artist.Name</span>
-                <br />
-            }
-        </span>
-    </p>
-    <p>
-        @if (Model.IsRecentlyAdded())
-        {
-            <span>Recently Added</span>
-        }
-        @if (Model.IsRecentlyReleased())
-        {
-            <span>Recently Released</span>
-        }
-    </p>
+    <h4>Music Details</h4>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <img src="https://i.imgur.com/lZWknpv.jpg" class="img-fluid rounded" alt="@Model.Name">
+            </div>
+            <div class="col">
+                <h5>@Model.Name</h5>
+                <p>
+                    <small class="text-muted">Artist:</small>
+                    @for (int i = 0; i < Model.Artists.Count(); i++)
+                    {
+                        <span>
+                            @Model.Artists.ElementAt(i).Name
+                        </span>
+                        @if (!(i == Model.Artists.Count() - 1))
+                        {
+                            <span>,</span>
+                        }
+                    }
+                </p>
+                <p>
+                    <small class="text-muted">Genre:</small>
+                    <span>@Model.Genre.Name</span>
+                </p>
+                @if (Model.Album != null)
+                {
+                    <p>
+                        <small class="text-muted">Album:</small>
+                        <span>@Model.Album.Name</span>
+                    </p>
+                }
+                <p>
+                    <small class="text-muted">Language:</small>
+                    <span>@Model.Language</span>
+                </p>
+                <p>
+                    @if (Model.IsRecentlyAdded())
+                    {
+                        <span class="badge badge-pill badge-warning">Recent Addition</span>
+                    }
+                    @if (Model.IsRecentlyReleased())
+                    {
+                        <span class="badge badge-pill badge-warning">New Release</span>
+                    }
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                @foreach (var artist in Model.Artists)
+                {
+                    <span class="badge">
+                        <a asp-controller="Search" asp-action="SearchByArtist" asp-route-id="@artist.Id">More
+                            by
+                            @artist.Name</a>
+                    </span>
+                }
+                @if (Model.Album != null)
+                {
+                    <span class="badge">
+                        <a asp-controller="Album" asp-action="Detail" asp-route-id="@Model.Album.Id">More
+                            from
+                            @Model.Album.Name</a>
+                    </span>
+                }
+                <span class="badge">
+                    <a asp-controller="Search" asp-action="SearchByGenre" asp-route-genreName="@Model.Genre.Name">More
+                        in
+                        @Model.Genre.Name</a>
+                </span>
+                <span class="badge">
+                    <a href="#">More @Model.Language musics</a>
+                </span>
+            </div>
+        </div>
+    </div>
+
 </section>

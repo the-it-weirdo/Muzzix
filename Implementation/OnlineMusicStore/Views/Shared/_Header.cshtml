@@ -1,5 +1,7 @@
 <header class="page-header">
     @{
+        // NavBAr will always render
+        @await Html.PartialAsync("_NavBar")
         try
         {
             string currentAction = Html.ViewContext.RouteData.Values["action"].ToString();
@@ -13,11 +15,6 @@
         catch (Exception)
         {
             // Pass since there's nothing to render on Exception
-        }
-        finally
-        {
-            // NavBAr will always render
-            @await Html.PartialAsync("_NavBar")
         }
     }
 </header>

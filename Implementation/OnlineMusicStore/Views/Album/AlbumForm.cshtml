@@ -1,0 +1,50 @@
+@model OnlineMusicStore.ViewModels.AlbumFormViewModel
+@{
+    ViewData["Title"] = "Albums";
+}
+
+@* For Multi-Select *@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.16/css/bootstrap-multiselect.min.css" integrity="sha512-wHTuOcR1pyFeyXVkwg3fhfK46QulKXkLq1kxcEEpjnAPv63B/R49bBqkJHLvoGFq6lvAEKlln2rE1JfIPeQ+iw==" crossorigin="anonymous" />
+
+<h1>@Model.Title</h1>
+<section class="row">
+    <div class="col-md-4">
+        <form id="musicForm" asp-controller="Album" asp-action="Save" method="POST" onsubmit="return formSubmit()">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group" id="MusicGroup">
+                <label asp-for="SelectedMusicIds" class="form-label"></label>
+                @* <input class="form-control" list="Model.Artists" asp-for="SelectedArtists" placeholder="Type to search..."> *@
+                @* <select asp-for="SelectedArtists[0]" asp-items="Model.Artists" class="form-control"></select> *@
+                @* @if(!(Model.SelectedArtists == null))
+                {
+                    for (int i = 0; i < Model.SelectedArtists.Count; i++)
+                    {
+                        <select asp-for="SelectedArtists[i]" asp-items="Model.Artists" class="form-control"></select>            
+                    }
+                }
+                else
+                {
+                    <select asp-for="SelectedArtists[0]" asp-items="Model.Artists" class="form-control"></select>            
+                } *@
+                <select id="music-multiselect" asp-for="SelectedMusicIds" asp-items="Model.Musics" class="form-control"></select>            
+                <span asp-validation-for="SelectedMusicIds" class="text-danger"></span>
+            </div>   
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+        <a asp-controller="Album" asp-action="Index">Go back</a>
+    </div>
+</section>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    await Html.RenderPartialAsync("AlbumFormScript");}
+}

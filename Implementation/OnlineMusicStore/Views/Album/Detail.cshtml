@@ -1,0 +1,33 @@
+@model OnlineMusicStore.Models.Album
+@{
+    ViewData["Title"] = "Album";
+}
+
+<section>
+    <h1 class="display-4">Album Details</h1>
+    <h2 class="display-3">@Model.Name</h2>
+    <hr />
+    <p>
+        <span>Artists: (Total: @Model.Artists.Count())<br />
+            @foreach (var artist in Model.Artists)
+            {
+                <span>@artist.Name</span><span>(@artist.Rating)</span>
+                <br />
+            }
+        </span>
+        <span>Musics: (Total: @Model.Musics.Count())<br />
+            @foreach (var music in Model.Musics)
+            {
+                <span>@music.Name</span><span>(@music.Genre.Name)</span>
+                <br />
+            }
+        </span>
+        @* <span>Genres: (Total: @Model.Genres.Count())<br />
+            @foreach (var genre in Model.Genres)
+            {
+                <span>@genre.Name</span>
+                <br />
+            }
+        </span> *@
+    </p>
+</section>

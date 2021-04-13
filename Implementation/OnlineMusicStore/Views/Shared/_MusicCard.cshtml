@@ -1,101 +1,86 @@
 @model OnlineMusicStore.Models.Music;
 
 <div class="card mb-3" style="max-width: 540px;">
-    <div class="row">
-        <div class="col">
-            <div class="card-header">Music</div>
-        </div>
-    </div>
-    <div class="row no-gutters">
-        <div class="col-md-4">
-            <img src="https://i.imgur.com/lZWknpv.jpg" class="card-img border rounded img-thumbnail" alt="@Model.Name">
-        </div>
-        <div class="col-md-8">
-            <div class="card-body">
-                <h5 class="card-title">@Model.Name</h5>
-                @if (Model.Artists != null)
+    <img src="https://i.imgur.com/lZWknpv.jpg" class="card-img-top border rounded img-thumbnail" alt="@Model.Name">
+    <div class="card-header">Music</div>
+    <div class="card-body">
+        <h5 class="card-title">@Model.Name</h5>
+        @if (Model.Artists != null)
+        {
+            <p class="card-text">
+                <small class="text-muted">Artist:</small>
+                @for (int i = 0; i < Model.Artists.Count(); i++)
                 {
-                    <p class="card-text">
-                        <small class="text-muted">Artist:</small>
-                        @for (int i = 0; i < Model.Artists.Count(); i++)
-                        {
-                            <span>
-                                @Model.Artists.ElementAt(i).Name
-                            </span>
-                            @if (!(i == Model.Artists.Count() - 1))
-                            {
-                                <span>,</span>
-                            }
-                        }
-                    </p>
-                }
-                @if (Model.Genre != null)
-                {
-                    <p class="card-text">
-                        <small class="text-muted">Genre:</small>
-                        <span>@Model.Genre.Name</span>
-                    </p>
-                }
-                @if (Model.Album != null)
-                {
-                    <p class="card-text">
-                        <small class="text-muted">Album:</small>
-                        <span>@Model.Album.Name</span>
-                    </p>
-                }
-                <p class="card-text">
-                    <small class="text-muted">Language:</small>
-                    <span>@Model.Language</span>
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <div class="card-footer">
-                @if (Model.IsRecentlyAdded())
-                {
-                    <span class="badge badge-pill badge-warning">Recent Addition</span>
-                }
-                @if (Model.IsRecentlyReleased())
-                {
-                    <span class="badge badge-pill badge-warning">New Release</span>
-                }
-                @if (Model.Artists != null)
-                {
-                    @foreach (var artist in Model.Artists)
+                    <span>
+                        @Model.Artists.ElementAt(i).Name
+                    </span>
+                    @if (!(i == Model.Artists.Count() - 1))
                     {
-                        <span class="badge">
-                            <a asp-controller="Search" asp-action="SearchByArtist" asp-route-id="@artist.Id"
-                        class="card-link">More
-                                by
-                                @artist.Name</a>
-                        </span>
+                        <span>,</span>
                     }
                 }
-                @if (Model.Album != null)
-                {
-                    <span class="badge">
-                        <a asp-controller="Album" asp-action="Detail" asp-route-id="@Model.Album.Id" class="card-link">More
-                            from
-                            @Model.Album.Name</a>
-                    </span>
-                }
-                @if (Model.Genre != null)
-                {
-                    <span class="badge">
-                        <a asp-controller="Search" asp-action="SearchByGenre" asp-route-genreName="@Model.Genre.Name"
-                        class="card-link">More in
-                            @Model.Genre.Name</a>
-                    </span>
-                }
+            </p>
+        }
+        @if (Model.Genre != null)
+        {
+            <p class="card-text">
+                <small class="text-muted">Genre:</small>
+                <span>@Model.Genre.Name</span>
+            </p>
+        }
+        @if (Model.Album != null)
+        {
+            <p class="card-text">
+                <small class="text-muted">Album:</small>
+                <span>@Model.Album.Name</span>
+            </p>
+        }
+        <p class="card-text">
+            <small class="text-muted">Language:</small>
+            <span>@Model.Language</span>
+        </p>
+    </div>
+    <div class="card-footer">
+        @if (Model.IsRecentlyAdded())
+        {
+            <span class="badge badge-pill badge-warning">Recent Addition</span>
+        }
+        @if (Model.IsRecentlyReleased())
+        {
+            <span class="badge badge-pill badge-warning">New Release</span>
+        }
+        @if (Model.Artists != null)
+        {
+            @foreach (var artist in Model.Artists)
+            {
                 <span class="badge">
-                    <a href="#" class="card-link">More @Model.Language musics</a>
+                    <a asp-controller="Search" asp-action="SearchByArtist" asp-route-id="@artist.Id" class="card-link">More
+                        by
+                        @artist.Name</a>
                 </span>
-                <span class="badge">
-                    <a asp-controller="Music" asp-action="Detail" asp-route-id="@Model.Id" class="card-link">Details</a>
-                </span>
-            </div>
-        </div>
+            }
+        }
+        @if (Model.Album != null)
+        {
+            <span class="badge">
+                <a asp-controller="Album" asp-action="Detail" asp-route-id="@Model.Album.Id" class="card-link">More
+                    from
+                    @Model.Album.Name</a>
+            </span>
+        }
+        @if (Model.Genre != null)
+        {
+            <span class="badge">
+                <a asp-controller="Search" asp-action="SearchByGenre" asp-route-genreName="@Model.Genre.Name"
+                class="card-link">More in
+                    @Model.Genre.Name</a>
+            </span>
+        }
+        <span class="badge">
+            <a href="#" class="card-link">More @Model.Language musics</a>
+        </span>
+        <span class="badge">
+            <a asp-controller="Music" asp-action="Detail" asp-route-id="@Model.Id" class="card-link">Details</a>
+        </span>
     </div>
 </div>

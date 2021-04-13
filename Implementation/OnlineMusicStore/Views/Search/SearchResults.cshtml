@@ -1,0 +1,91 @@
+@model OnlineMusicStore.ViewModels.SearchViewModel
+@{
+    ViewData["Title"] = "Search";
+    ViewData["IsAllEmpty"] = true;
+}
+
+<section>
+    <h1 class="display-4">Search Results</h1>
+    <p>Search results for: @Model.QueryString</p>
+    <hr />
+    @if (Model.Musics != null && Model.Musics.Any())
+    {
+        ViewData["IsAllEmpty"] = false;
+        <section>
+            <h3>Musics</h3>
+            <p>
+                @foreach (var music in Model.Musics)
+                {
+                <p>
+                    <a asp-controller="Music" asp-action="Detail" asp-route-id="@music.Id">@music.Name</a>
+                </p>
+                }
+            </p>
+        </section>
+    }
+    @if (Model.Albums != null && Model.Albums.Any())
+    {
+        ViewData["IsAllEmpty"] = false;
+        <section>
+            <h3>Albums</h3>
+            <p>
+                @foreach (var album in Model.Albums)
+                {
+                <p>
+                    <a asp-controller="Album" asp-action="Detail" asp-route-id="@album.Id">@album.Name</a>
+                </p>
+                }
+            </p>
+        </section>
+    }
+    @if (Model.Artists != null && Model.Artists.Any())
+    {
+        ViewData["IsAllEmpty"] = false;
+        <section>
+            <h3>Artists</h3>
+            <p>
+                @foreach (var artist in Model.Artists)
+                {
+                <p>
+                    <a asp-controller="Search" asp-action="SearchByArtist" asp-route-id="@artist.Id">@artist.Name</a>
+                </p>
+                }
+            </p>
+        </section>
+    }
+    @if (Model.Genres != null && Model.Genres.Any())
+    {
+        ViewData["IsAllEmpty"] = false;
+        <section>
+            <h3>Genres</h3>
+            <p>
+                @foreach (var genre in Model.Genres)
+                {
+                <p>
+                    <a asp-controller="Search" asp-action="SearchByGenre" asp-route-genreName="@genre.Name">@genre.Name</a>
+                </p>
+                }
+            </p>
+        </section>
+    }
+    @if (Model.MusicsByLanguage != null && Model.MusicsByLanguage.Any())
+    {
+        ViewData["IsAllEmpty"] = false;
+        <section>
+            <h3>Musics By Language</h3>
+            <p>
+                @foreach (var music in Model.MusicsByLanguage)
+                {
+                <p>
+                    <a asp-controller="Music" asp-action="Detail" asp-route-id="@music.Id">@music.Name (@music.Language)</a>
+                </p>
+                }
+            </p>
+        </section>
+    }
+    @* If all empty *@
+    @if ((bool)ViewData["IsAllEmpty"])
+    {
+        <p class="text-center display-4">Nothing found for @Model.QueryString .</p>
+    }
+</section>

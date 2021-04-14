@@ -14,6 +14,10 @@ namespace OnlineMusicStore.Models
         [Required]
         public string Language { get; set; }
 
+        [Required]
+        [Display(Name = "Image Url")]
+        public string ImageUrl {get; set;}
+
         [Display(Name = "Release Date")]
         public DateTime DateReleased { get; set; }
 

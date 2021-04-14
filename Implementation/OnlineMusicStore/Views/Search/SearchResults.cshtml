@@ -13,13 +13,13 @@
         ViewData["IsAllEmpty"] = false;
         <section>
             <h3>Musics</h3>
-            <div class="card-deck">
+            <div class="responsive-card-deck">
                 @foreach (var music in Model.Musics)
                 {
-                @* <p>
-                    <a asp-controller="Music" asp-action="Detail" asp-route-id="@music.Id">@music.Name</a>
-                </p> *@
-                @await Html.PartialAsync("_MusicCard", music)
+                    @* <p>
+                        <a asp-controller="Music" asp-action="Detail" asp-route-id="@music.Id">@music.Name</a>
+                        </p> *@
+                    @await Html.PartialAsync("_MusicCard", music)
                 }
             </div>
         </section>

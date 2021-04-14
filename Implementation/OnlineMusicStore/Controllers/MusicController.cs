@@ -126,7 +126,6 @@ namespace OnlineMusicStore.Controllers
                 musicFromDb.Language = music.Language;
                 musicFromDb.ImageUrl = music.ImageUrl;
                 musicFromDb.GenreId = music.GenreId;
-                musicFromDb.AlbumId = music.AlbumId;
                 musicFromDb.DateReleased = music.DateReleased;
                 musicFromDb.Artists = music.Artists;
 

@@ -39,32 +39,28 @@ namespace OnlineMusicStore.Controllers
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
+
             var artist = await _dbContext.Artists.FindAsync(id);
+
             if (artist == null)
-            {
                 return NotFound();
-            }
+
             return View("ArtistForm", new ArtistFormViewModel(artist));
         }
 
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
+
             var artist = await _dbContext.Artists.FindAsync(id);
+
             if (artist == null)
-            {
                 return NotFound();
-            }
             else
-            {
                 _dbContext.Artists.Remove(artist);
-            }
+
             await _dbContext.SaveChangesAsync();
             return RedirectToAction("Index");
         }
@@ -75,19 +71,14 @@ namespace OnlineMusicStore.Controllers
         {
 
             if (!ModelState.IsValid)
-            {
                 return View("ArtistForm", artist);
-            }
 
             if (artist.Id == 0)
-            {
                 _dbContext.Artists.Add(artist);
-            }
             else
             {
                 var artitstFromDb = _dbContext.Artists.Single(ar => ar.Id == artist.Id);
 
-                artitstFromDb.Id = artist.Id;
                 artitstFromDb.Name = artist.Name;
                 artitstFromDb.Rating = artist.Rating;
             }

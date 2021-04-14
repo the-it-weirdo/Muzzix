@@ -11,6 +11,10 @@ namespace OnlineMusicStore.Models
         [Required]
         public string Name { get; set; }
 
+        [Required]
+        [Display(Name = "Image Url")]
+        public string ImageUrl { get; set; }
+
         public ICollection<Music> Musics { get; set; }
 
         public ICollection<Artist> Artists { get; set; }

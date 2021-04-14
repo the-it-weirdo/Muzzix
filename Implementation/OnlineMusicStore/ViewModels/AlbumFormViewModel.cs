@@ -22,6 +22,10 @@ namespace OnlineMusicStore.ViewModels
         [Required]
         public string Name { get; set; }
 
+        [Required]
+        [Display(Name = "Image Url")]
+        public string ImageUrl { get; set; }
+
         public SelectList Musics { get; private set; }
 
         public void SetMusic(IEnumerable<Music> Musics)
@@ -36,7 +40,7 @@ namespace OnlineMusicStore.ViewModels
         //     this.Artists = new MultiSelectList(Artist, "Id", "Name");
         // }
 
-        public List<int> SelectedMusicIds {get;set;}
+        public List<int> SelectedMusicIds { get; set; }
 
         public AlbumFormViewModel()
         {
@@ -49,6 +53,7 @@ namespace OnlineMusicStore.ViewModels
         {
             this.Id = album.Id;
             this.Name = album.Name;
+            this.ImageUrl = album.ImageUrl;
             this.SelectedMusicIds = album.Musics.Select(m => m.Id).ToList();
         }
     }

@@ -39,32 +39,28 @@ namespace OnlineMusicStore.Controllers
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
+            
             var genre = await _dbContext.Genres.FindAsync(id);
+            
             if (genre == null)
-            {
                 return NotFound();
-            }
+
             return View("GenreForm", new GenreFormViewModel(genre));
         }
 
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
+            
             var genre = await _dbContext.Genres.FindAsync(id);
+            
             if (genre == null)
-            {
                 return NotFound();
-            }
             else
-            {
                 _dbContext.Genres.Remove(genre);
-            }
+
             await _dbContext.SaveChangesAsync();
             return RedirectToAction("Index");
         }
@@ -75,19 +71,14 @@ namespace OnlineMusicStore.Controllers
         {
 
             if (!ModelState.IsValid)
-            {
                 return View("GenreForm", genre);
-            }
 
             if (genre.Id == 0)
-            {
                 _dbContext.Genres.Add(genre);
-            }
             else
             {
                 var genreFromDb = _dbContext.Genres.Single(ar => ar.Id == genre.Id);
 
-                genreFromDb.Id = genre.Id;
                 genreFromDb.Name = genre.Name;
             }
             await _dbContext.SaveChangesAsync();

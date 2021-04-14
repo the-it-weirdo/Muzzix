@@ -1,7 +1,7 @@
 @model OnlineMusicStore.Models.Music;
 
 <div class="card mb-3" style="max-width: 540px;">
-    <img src="https://i.imgur.com/lZWknpv.jpg" class="card-img-top border rounded img-thumbnail" alt="@Model.Name">
+    <img src="@Model.ImageUrl" class="card-img-top border rounded img-thumbnail" alt="@Model.Name" />
     <div class="card-header">Music</div>
     <div class="card-body">
         <h5 class="card-title">@Model.Name</h5>

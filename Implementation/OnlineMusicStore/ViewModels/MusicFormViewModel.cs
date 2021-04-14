@@ -25,6 +25,10 @@ namespace OnlineMusicStore.ViewModels
         [Required]
         public string Language { get; set; }
 
+        [Required]
+        [Display(Name = "Image Url")]
+        public string ImageUrl { get; set; }
+
         [Display(Name = "Release Date")]
         public DateTime DateReleased { get; set; }
 
@@ -63,6 +67,7 @@ namespace OnlineMusicStore.ViewModels
             Id = music.Id;
             Name = music.Name;
             Language = music.Language;
+            ImageUrl = music.ImageUrl;
             DateReleased = music.DateReleased;
             GenreId = music.GenreId;
             SelectedArtistIds = music.Artists.Select(ar => ar.Id).ToList();
@@ -76,6 +81,7 @@ namespace OnlineMusicStore.ViewModels
                 Id = Id ?? 0, // If right hand Id is null, left hand Id is assigned 0.
                 Name = Name,
                 Language = Language,
+                ImageUrl = ImageUrl,
                 DateReleased = DateReleased,
                 GenreId = GenreId,
                 Artists = new HashSet<Artist>() // Populated in Controller

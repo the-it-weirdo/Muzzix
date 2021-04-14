@@ -22,6 +22,11 @@
                 <span asp-validation-for="Language" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="ImageUrl" class="form-label"></label>
+                <input asp-for="ImageUrl" class="form-control" />
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="DateReleased" class="form-label"></label>
                 <input asp-for="DateReleased" class="form-control" type="date"/>
                 <span asp-validation-for="DateReleased" class="text-danger"></span>

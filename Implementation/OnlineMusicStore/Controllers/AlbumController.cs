@@ -107,6 +107,7 @@ namespace OnlineMusicStore.Controllers
             {
                 Id = albumFormViewModel.Id.Value,
                 Name = albumFormViewModel.Name,
+                ImageUrl = albumFormViewModel.ImageUrl,
                 Musics = new HashSet<Music>(),
                 Artists = new HashSet<Artist>()
             };
@@ -149,6 +150,7 @@ namespace OnlineMusicStore.Controllers
 
                 albumFromDb.Id = album.Id;
                 albumFromDb.Name = album.Name;
+                albumFromDb.ImageUrl = album.ImageUrl;
 
                 // For Musics
                 // If in db but not in form data, remove from db

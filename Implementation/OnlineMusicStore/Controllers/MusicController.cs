@@ -124,6 +124,7 @@ namespace OnlineMusicStore.Controllers
             }
             else
             {
+                _logger.LogInformation($"Updating Music with Id: {music.Id}");
                 var musicFromDb = _dbContext.Musics
                 .Include(m => m.Artists)
                 .SingleOrDefault(m => m.Id == music.Id);
@@ -134,6 +135,7 @@ namespace OnlineMusicStore.Controllers
                 musicFromDb.Id = music.Id;
                 musicFromDb.Name = music.Name;
                 musicFromDb.Language = music.Language;
+                musicFromDb.ImageUrl = music.ImageUrl;
                 musicFromDb.GenreId = music.GenreId;
                 musicFromDb.AlbumId = music.AlbumId;
                 musicFromDb.DateReleased = music.DateReleased;

@@ -58,17 +58,15 @@ namespace OnlineMusicStore.Controllers
         public IActionResult Edit(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
+                
             var music = _dbContext.Musics
             .Include(m => m.Artists)
             .SingleOrDefault(m => m.Id == id);
 
             if (music == null)
-            {
                 return NotFound();
-            }
+
             var viewModel = new MusicFormViewModel(music);
             viewModel.SetArtists(_dbContext.Artists.ToList());
             viewModel.SetGenres(_dbContext.Genres.ToList());
@@ -78,18 +76,15 @@ namespace OnlineMusicStore.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
+
             var music = await _dbContext.Musics.FindAsync(id);
+            
             if (music == null)
-            {
                 return NotFound();
-            }
             else
-            {
                 _dbContext.Musics.Remove(music);
-            }
+            
             await _dbContext.SaveChangesAsync();
             return RedirectToAction("Index");
         }
@@ -100,26 +95,21 @@ namespace OnlineMusicStore.Controllers
         {
 
             if (!ModelState.IsValid)
-            {
                 return View("MusicForm", musicFormViewModel);
-            }
 
             var music = musicFormViewModel.MapToMusicObject();
+            foreach (var artistId in musicFormViewModel.SelectedArtistIds)
+            {
+                var artist = await _dbContext.Artists.SingleOrDefaultAsync(ar => ar.Id == artistId);
+                if (artist != null)
+                    music.Artists.Add(artist);
+                _logger.LogInformation($"Adding {artist.Name} to music {music.Name} with Id {music.Id}");
+            }
 
             if (music.Id == 0)
             {
                 music.DateAdded = DateTime.Now;
-                _logger.LogInformation("Creating New");
-                _logger.LogInformation(musicFormViewModel.SelectedArtistIds.Count.ToString());
-                foreach (var artistId in musicFormViewModel.SelectedArtistIds)
-                {
-                    var artist = await _dbContext.Artists.SingleOrDefaultAsync(ar => ar.Id == artistId);
-                    if (artist != null)
-                        music.Artists.Add(artist);
-                    _logger.LogInformation($"Adding {artist.Name}");
-
-                }
-                _logger.LogInformation(music.Artists.Count.ToString());
+                _logger.LogInformation($"Creating new music {music.Name} with {music.Artists.Count()} artists.");
                 _dbContext.Musics.Add(music);
             }
             else
@@ -132,22 +122,12 @@ namespace OnlineMusicStore.Controllers
                 if (musicFromDb == null)
                     return NotFound();
 
-                musicFromDb.Id = music.Id;
                 musicFromDb.Name = music.Name;
                 musicFromDb.Language = music.Language;
                 musicFromDb.ImageUrl = music.ImageUrl;
                 musicFromDb.GenreId = music.GenreId;
                 musicFromDb.AlbumId = music.AlbumId;
                 musicFromDb.DateReleased = music.DateReleased;
-
-                foreach (var artistId in musicFormViewModel.SelectedArtistIds)
-                {
-                    var artist = await _dbContext.Artists.SingleOrDefaultAsync(ar => ar.Id == artistId);
-                    if (artist != null)
-                        music.Artists.Add(artist);
-                    _logger.LogInformation($"Adding {artist.Name}");
-
-                }
                 musicFromDb.Artists = music.Artists;
 
             }

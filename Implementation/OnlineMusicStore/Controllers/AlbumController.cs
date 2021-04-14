@@ -148,7 +148,6 @@ namespace OnlineMusicStore.Controllers
                 if (albumFromDb == null)
                     return NotFound();
 
-                albumFromDb.Id = album.Id;
                 albumFromDb.Name = album.Name;
                 albumFromDb.ImageUrl = album.ImageUrl;
 

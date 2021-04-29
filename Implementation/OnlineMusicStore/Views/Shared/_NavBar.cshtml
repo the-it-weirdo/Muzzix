@@ -9,29 +9,64 @@
     <div class="collapse navbar-collapse" id="navbarColor02">
         <ul class="navbar-nav mr-auto">
             <li class="@Html.IsSelected("Home", "Index", "nav-item active", "nav-item")">
-                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index"><i class="fas fa-home"></i> Home</a>
+                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index"><i class="fas fa-home"></i>
+                    Home</a>
             </li>
             <li class="@Html.IsSelected("Home", "About", "nav-item active", "nav-item")">
-                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="About"><i class="fas fa-info-circle"></i> About Muzzix</a>
+                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="About"><i
+                        class="fas fa-info-circle"></i> About Muzzix</a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-                    aria-expanded="false"><i class="fas fa-music"></i> Find your music</a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" asp-controller="Search" asp-action="SearchAll" asp-route-allType="Artist"><i class="fas fa-user"></i> Artist</a>
-                    <a class="dropdown-item" asp-controller="Search" asp-action="SearchAll" asp-route-allType="Album"><i class="fas fa-record-vinyl"></i> Album</a>
-                    <a class="dropdown-item" asp-controller="Search" asp-action="SearchAll" asp-route-allType="Genre"><i class="fas fa-tags"></i> Genre</a>
-                    <a class="dropdown-item" asp-controller="Search" asp-action="SearchAll" asp-route-allType="Language"><i class="fas fa-language"></i> Language</a>
-                    @* <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Separated link</a> *@
-                </div>
+                @{
+                    if (User.IsInRole(OnlineMusicStore.Models.UserRoles.AdminRole))
+                    {
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                        aria-expanded="false"><i class="fas fa-database"></i> Manage Database</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" asp-controller="Artist" asp-action="Index"><i class="fas fa-user"></i>
+                                Manage Artist</a>
+                            <a class="dropdown-item" asp-controller="Album" asp-action="Index"><i
+                                class="fas fa-record-vinyl"></i> Manage Album</a>
+                            <a class="dropdown-item" asp-controller="Genre" asp-action="Index"><i class="fas fa-tags"></i>
+                                Manage Genre</a>
+                            <a class="dropdown-item" asp-controller="Music" asp-action="Index"><i class="fas fa-language"></i>
+                                Manage Music</a>
+                            @* <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Separated link</a> *@
+                        </div>
+                    }
+                    else
+                    {
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                        aria-expanded="false"><i class="fas fa-music"></i> Find your music</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" asp-controller="Search" asp-action="SearchAll"
+                        asp-route-allType="Artist"><i class="fas fa-user"></i> Artist</a>
+                            <a class="dropdown-item" asp-controller="Search" asp-action="SearchAll" asp-route-allType="Album"><i
+                                class="fas fa-record-vinyl"></i> Album</a>
+                            <a class="dropdown-item" asp-controller="Search" asp-action="SearchAll" asp-route-allType="Genre"><i
+                                class="fas fa-tags"></i> Genre</a>
+                            <a class="dropdown-item" asp-controller="Search" asp-action="SearchAll"
+                        asp-route-allType="Language"><i class="fas fa-language"></i> Language</a>
+                            @* <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Separated link</a> *@
+                        </div>
+                    }
+                }
             </li>
-            <li class="@Html.IsSelected("User", "Cart", "nav-item active", "nav-item")">
-                <a class="nav-link" asp-area="" asp-controller="Cart" asp-action="Index"><i class="fas fa-shopping-cart"></i> My Cart</a>
-            </li>
-            <li class="@Html.IsSelected("Home", "Contact", "nav-item active", "nav-item")">
-                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact"><i class="fas fa-envelope"></i> Contact Us</a>
-            </li>
+            @{
+                if (!User.IsInRole(OnlineMusicStore.Models.UserRoles.AdminRole))
+                {
+                    <li class="@Html.IsSelected("User", "Cart", "nav-item active", "nav-item")">
+                        <a class="nav-link" asp-area="" asp-controller="Cart" asp-action="Index"><i
+                            class="fas fa-shopping-cart"></i> My Cart</a>
+                    </li>
+                    <li class="@Html.IsSelected("Home", "Contact", "nav-item active", "nav-item")">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact"><i
+                            class="fas fa-envelope"></i> Contact Us</a>
+                    </li>
+                }
+            }
         </ul>
         <form class="form-inline my-2 my-lg-0" method="GET" asp-controller="Search" asp-action="SearchByQuery">
             <input name="queryString" id="queryString" class="form-control mr-sm-2" type="text" placeholder="Search">

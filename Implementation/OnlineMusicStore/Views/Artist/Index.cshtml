@@ -5,7 +5,10 @@
 
 <section>
     <h1 class="display-4">Artists</h1>
-    <p><a asp-controller="Artist" asp-action="CreateNew">Add New Artist</a></p>
+    @if (User.IsInRole(OnlineMusicStore.Models.UserRoles.AdminRole))
+    {
+        <p><a asp-controller="Artist" asp-action="CreateNew">Add New Artist</a></p>
+    }
     @if (Model.Any())
     {
         <table class="table table-bordered">
@@ -13,7 +16,10 @@
                 <tr>
                     <th>Name</th>
                     <th>Rating</th>
-                    <th>Actions</th>
+                    @if (User.IsInRole(OnlineMusicStore.Models.UserRoles.AdminRole))
+                    {
+                        <th>Actions</th>
+                    }
                 </tr>
             </thead>
             <tbody>
@@ -22,10 +28,13 @@
                     <tr>
                         <td>@artist.Name</td>
                         <td>@artist.Rating</td>
-                        <td>
-                            <a asp-controller="Artist" asp-action="Edit" asp-route-id="@artist.Id">Edit</a> |
-                            <a asp-controller="Artist" asp-action="Delete" asp-route-id="@artist.Id">Delete</a>
-                        </td>
+                        @if (User.IsInRole(OnlineMusicStore.Models.UserRoles.AdminRole))
+                        {
+                            <td>
+                                <a asp-controller="Artist" asp-action="Edit" asp-route-id="@artist.Id">Edit</a> |
+                                <a asp-controller="Artist" asp-action="Delete" asp-route-id="@artist.Id">Delete</a>
+                            </td>
+                        }
                     </tr>
                 }
             </tbody>

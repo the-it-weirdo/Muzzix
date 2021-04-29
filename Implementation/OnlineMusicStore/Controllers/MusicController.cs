@@ -42,7 +42,6 @@ namespace OnlineMusicStore.Controllers
             return View("MusicForm", viewModel);
         }
 
-        [Authorize(Roles = UserRoles.AdminRole)]
         public IActionResult Detail(int? id)
         {
             var music = _dbContext.Musics

@@ -32,6 +32,7 @@ namespace OnlineMusicStore.Controllers
             return View(musics);
         }
 
+        [Authorize(Roles = UserRoles.AdminRole)]
         public IActionResult CreateNew()
         {
             var viewModel = new MusicFormViewModel();
@@ -41,6 +42,7 @@ namespace OnlineMusicStore.Controllers
             return View("MusicForm", viewModel);
         }
 
+        [Authorize(Roles = UserRoles.AdminRole)]
         public IActionResult Detail(int? id)
         {
             var music = _dbContext.Musics
@@ -55,6 +57,7 @@ namespace OnlineMusicStore.Controllers
             return View(music);
         }
 
+        [Authorize(Roles = UserRoles.AdminRole)]
         public IActionResult Edit(int? id)
         {
             if (id == null)
@@ -73,6 +76,7 @@ namespace OnlineMusicStore.Controllers
             return View("MusicForm", viewModel);
         }
 
+        [Authorize(Roles = UserRoles.AdminRole)]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -90,6 +94,7 @@ namespace OnlineMusicStore.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = UserRoles.AdminRole)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Save(MusicFormViewModel musicFormViewModel)
         {

@@ -5,7 +5,10 @@
 
 <section>
     <h1 class="display-4">Albums</h1>
-    <p><a asp-controller="Album" asp-action="CreateNew">Add New Album</a></p>
+    @if (User.IsInRole(OnlineMusicStore.Models.UserRoles.AdminRole))
+    {
+        <p><a asp-controller="Album" asp-action="CreateNew">Add New Album</a></p>
+    }
     @if (Model.Any())
     {
         <table class="table table-bordered">
@@ -21,9 +24,20 @@
                     <tr>
                         <td>@Album.Name</td>
                         <td>
-                            <a asp-controller="Album" asp-action="Detail" asp-route-id="@Album.Id">Details</a> |
-                            <a asp-controller="Album" asp-action="Edit" asp-route-id="@Album.Id">Edit</a> |
-                            <a asp-controller="Album" asp-action="Delete" asp-route-id="@Album.Id">Delete</a>
+                            @if (User.IsInRole(OnlineMusicStore.Models.UserRoles.AdminRole))
+                            {
+                                <span>
+                                    <a asp-controller="Album" asp-action="Detail" asp-route-id="@Album.Id">Details</a> |
+                                    <a asp-controller="Album" asp-action="Edit" asp-route-id="@Album.Id">Edit</a> |
+                                    <a asp-controller="Album" asp-action="Delete" asp-route-id="@Album.Id">Delete</a>
+                                </span>
+                            }
+                            else
+                            {
+                                <span>
+                                    <a asp-controller="Album" asp-action="Detail" asp-route-id="@Album.Id">Details</a>
+                                </span>
+                            }
                         </td>
                     </tr>
                 }

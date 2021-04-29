@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using OnlineMusicStore.Data;
 using OnlineMusicStore.Models;
 
 namespace OnlineMusicStore.Controllers
@@ -13,14 +14,23 @@ namespace OnlineMusicStore.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly ApplicationDbContext _dbContext;
+
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
         {
             _logger = logger;
+            _dbContext = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var recentMusicUrls = _dbContext.Musics
+            .ToList()
+            .Where(m => m.IsRecentlyAdded() && m.IsRecentlyReleased())
+            .ToList();
+
+            _logger.LogInformation($"In Index: {recentMusicUrls.Count}");
+            return View(recentMusicUrls);
         }
 
         public IActionResult About()

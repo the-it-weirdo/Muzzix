@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using OnlineMusicStore.Models;
 using OnlineMusicStore.ViewModels;
 using OnlineMusicStore.Data;
+using OnlineMusicStore.Repositories;
 
 namespace OnlineMusicStore.Controllers
 {
@@ -19,60 +20,23 @@ namespace OnlineMusicStore.Controllers
 
         private readonly ApplicationDbContext _dbContext;
 
+        private readonly SearchRepository _repository;
+
         public SearchController(ILogger<SearchController> logger, ApplicationDbContext context)
         {
             _logger = logger;
             _dbContext = context;
+            _repository = new SearchRepository(_dbContext);
         }
 
-        private List<Album> SearchAlbums(string query = "")
-        {
-            var albums = _dbContext.Albums.Where(al => al.Name.Contains(query)).ToList();
-            return albums;
-        }
-
-        private List<Music> SearchMusics(string query = "")
-        {
-            var musics = _dbContext.Musics.Where(m => m.Name.Contains(query)).ToList();
-            return musics;
-        }
-
-        private List<Artist> SearchArtists(string query = "")
-        {
-            var artists = _dbContext.Artists
-            .Where(a => a.Name.Contains(query))
-            .OrderBy(a => a.Name)
-            .ToList();
-            return artists;
-        }
-
-        private List<Genre> SearchGenres(string query = "")
-        {
-            var genres = _dbContext.Genres
-            .Where(al => al.Name.Contains(query))
-            .OrderBy(g => g.Name)
-            .ToList();
-            return genres;
-        }
-
-        private List<Music> SearchByLanguage(string language = "")
-        {
-            var musics = _dbContext.Musics
-            .Where(m => m.Language.Contains(language))
-            .OrderBy(m => m.Name)
-            .ToList();
-            return musics;
-        }
-
-        public IActionResult SearchByLanguageAction(string language)
+        public IActionResult SearchByLanguage(string language)
         {
             _logger.LogInformation(language);
-            var musics = SearchByLanguage(language);
 
             return View("SearchResults", new SearchViewModel
             {
                 QueryString = $"Musics in {language}.",
-                Musics = musics
+                Musics = _repository.SearchByLanguage(language)
             });
         }
 
@@ -81,11 +45,11 @@ namespace OnlineMusicStore.Controllers
             var viewModel = new SearchViewModel
             {
                 QueryString = queryString,
-                Musics = SearchMusics(queryString),
-                MusicsByLanguage = SearchByLanguage(queryString),
-                Albums = SearchAlbums(queryString),
-                Artists = SearchArtists(queryString),
-                Genres = SearchGenres(queryString)
+                Musics = _repository.SearchMusics(queryString),
+                MusicsByLanguage = _repository.SearchByLanguage(queryString),
+                Albums = _repository.SearchAlbums(queryString),
+                Artists = _repository.SearchArtists(queryString),
+                Genres = _repository.SearchGenres(queryString)
             };
 
             return View("SearchResults", viewModel);
@@ -94,39 +58,26 @@ namespace OnlineMusicStore.Controllers
         public IActionResult SearchByGenre(string genreName)
         {
             _logger.LogInformation(genreName);
-            var musics = _dbContext.Musics
-            .Include(m => m.Genre)
-            .Where(m => m.Genre.Name.Contains(genreName))
-            .ToList();
 
             return View("SearchResults", new SearchViewModel
             {
                 QueryString = $"Musics with {genreName} genre.",
-                Musics = musics
+                Musics = _repository.SearchByGenre(genreName)
             });
         }
 
         public IActionResult SearchByArtist(int id)
         {
-            var artist = _dbContext.Artists.SingleOrDefault(a => a.Id == id);
+
+            var artist = _repository.SearchArtist(id);
             if (artist == null)
                 return NotFound();
-
-            var musics = _dbContext.Musics
-            .Include(m => m.Artists)
-            .Where(m => m.Artists.Contains(artist))
-            .ToList();
-
-            var albums = _dbContext.Albums
-            .Include(al => al.Artists)
-            .Where(al => al.Artists.Contains(artist))
-            .ToList();
 
             return View("SearchResults", new SearchViewModel
             {
                 QueryString = $"Works of artist {artist.Name}",
-                Musics = musics,
-                Albums = albums
+                Musics = _repository.SearchMusicByArtist(artist),
+                Albums = _repository.SearchAlbumByArtist(artist)
             });
         }
 
@@ -138,35 +89,35 @@ namespace OnlineMusicStore.Controllers
             {
                 case "Artist":
                     {
-                        viewModel.Artists = SearchArtists();
+                        viewModel.Artists = _repository.SearchArtists();
                         break;
                     }
                 case "Album":
                     {
-                        viewModel.Albums = SearchAlbums();
+                        viewModel.Albums = _repository.SearchAlbums();
                         break;
                     }
                 case "Music":
                     {
-                        viewModel.Musics = SearchMusics();
+                        viewModel.Musics = _repository.SearchMusics();
                         break;
                     }
                 case "Genre":
                     {
-                        viewModel.Genres = SearchGenres();
+                        viewModel.Genres = _repository.SearchGenres();
                         break;
                     }
                 case "Language":
                     {
-                        viewModel.MusicsByLanguage = SearchByLanguage();
+                        viewModel.MusicsByLanguage = _repository.SearchByLanguage();
                         break;
                     }
                 default:
                     {
-                        viewModel.Musics = SearchMusics();
-                        viewModel.Albums = SearchAlbums();
-                        viewModel.Artists = SearchArtists();
-                        viewModel.Genres = SearchGenres();
+                        viewModel.Musics = _repository.SearchMusics();
+                        viewModel.Albums = _repository.SearchAlbums();
+                        viewModel.Artists = _repository.SearchArtists();
+                        viewModel.Genres = _repository.SearchGenres();
                         break;
                     }
             }

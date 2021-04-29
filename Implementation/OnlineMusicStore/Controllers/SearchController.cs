@@ -64,6 +64,18 @@ namespace OnlineMusicStore.Controllers
             return musics;
         }
 
+        public IActionResult SearchByLanguageAction(string language)
+        {
+            _logger.LogInformation(language);
+            var musics = SearchByLanguage(language);
+
+            return View("SearchResults", new SearchViewModel
+            {
+                QueryString = $"Musics in {language}.",
+                Musics = musics
+            });
+        }
+
         public IActionResult SearchByQuery(string queryString)
         {
             var viewModel = new SearchViewModel

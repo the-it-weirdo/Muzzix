@@ -2,7 +2,7 @@
     @{
         // NavBAr will always render
         @await Html.PartialAsync("_NavBar")
-        try
+        @* try
         {
             string currentAction = Html.ViewContext.RouteData.Values["action"].ToString();
             string currentController = Html.ViewContext.RouteData.Values["controller"].ToString();
@@ -15,6 +15,6 @@
         catch (Exception)
         {
             // Pass since there's nothing to render on Exception
-        }
+        } *@
     }
 </header>

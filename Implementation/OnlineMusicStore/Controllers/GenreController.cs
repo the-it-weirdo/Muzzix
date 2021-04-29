@@ -31,11 +31,13 @@ namespace OnlineMusicStore.Controllers
             return View(genres);
         }
 
+        [Authorize(Roles = UserRoles.AdminRole)]
         public IActionResult CreateNew()
         {
             return View("GenreForm", new GenreFormViewModel());
         }
 
+        [Authorize(Roles = UserRoles.AdminRole)]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -49,6 +51,7 @@ namespace OnlineMusicStore.Controllers
             return View("GenreForm", new GenreFormViewModel(genre));
         }
 
+        [Authorize(Roles = UserRoles.AdminRole)]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -66,6 +69,7 @@ namespace OnlineMusicStore.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = UserRoles.AdminRole)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Save(Genre genre)
         {

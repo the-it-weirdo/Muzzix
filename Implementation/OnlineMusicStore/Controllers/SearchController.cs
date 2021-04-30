@@ -18,15 +18,13 @@ namespace OnlineMusicStore.Controllers
     {
         private readonly ILogger<SearchController> _logger;
 
-        private readonly ApplicationDbContext _dbContext;
 
         private readonly SearchRepository _repository;
 
         public SearchController(ILogger<SearchController> logger, ApplicationDbContext context)
         {
             _logger = logger;
-            _dbContext = context;
-            _repository = new SearchRepository(_dbContext);
+            _repository = new SearchRepository(context);
         }
 
         public IActionResult SearchByLanguage(string language)

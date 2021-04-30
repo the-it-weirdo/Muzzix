@@ -8,82 +8,154 @@
     <h1 class="display-4">Search Results</h1>
     <p>Search results for: @Model.QueryString</p>
     <hr />
-    @if (Model.Musics != null && Model.Musics.Any())
-    {
-        ViewData["IsAllEmpty"] = false;
-        <section>
-            <h3>Musics</h3>
-            <div class="responsive-card-deck">
-                @foreach (var music in Model.Musics)
-                {
-                    @* <p>
-                        <a asp-controller="Music" asp-action="Detail" asp-route-id="@music.Id">@music.Name</a>
-                        </p> *@
-                    @await Html.PartialAsync("_MusicCard", music)
-                }
-            </div>
-        </section>
-    }
-    @if (Model.Albums != null && Model.Albums.Any())
-    {
-        ViewData["IsAllEmpty"] = false;
-        <section>
-            <h3>Albums</h3>
-            <p>
-                @foreach (var album in Model.Albums)
-                {
-                <p>
-                    <a asp-controller="Album" asp-action="Detail" asp-route-id="@album.Id">@album.Name</a>
-                </p>
-                }
-            </p>
-        </section>
-    }
-    @if (Model.Artists != null && Model.Artists.Any())
-    {
-        ViewData["IsAllEmpty"] = false;
-        <section>
-            <h3>Artists</h3>
-            <p>
-                @foreach (var artist in Model.Artists)
-                {
-                <p>
-                    <a asp-controller="Search" asp-action="SearchByArtist" asp-route-id="@artist.Id">@artist.Name</a>
-                </p>
-                }
-            </p>
-        </section>
-    }
-    @if (Model.Genres != null && Model.Genres.Any())
-    {
-        ViewData["IsAllEmpty"] = false;
-        <section>
-            <h3>Genres</h3>
-            <p>
-                @foreach (var genre in Model.Genres)
-                {
-                <p>
-                    <a asp-controller="Search" asp-action="SearchByGenre" asp-route-genreName="@genre.Name">@genre.Name</a>
-                </p>
-                }
-            </p>
-        </section>
-    }
-    @if (Model.MusicsByLanguage != null && Model.MusicsByLanguage.Any())
-    {
-        ViewData["IsAllEmpty"] = false;
-        <section>
-            <h3>Musics By Language</h3>
-            <p>
-                @foreach (var music in Model.MusicsByLanguage)
-                {
-                <p>
-                    <a asp-controller="Music" asp-action="Detail" asp-route-id="@music.Id">@music.Name (@music.Language)</a>
-                </p>
-                }
-            </p>
-        </section>
-    }
+    <div id="accordion">
+        @if (Model.Musics != null && Model.Musics.Any())
+        {
+            ViewData["IsAllEmpty"] = false;
+            <section id="musics">
+                <div class="card">
+                    <div class="card-header" id="headingMusic">
+                        <h3 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseMusic"
+                            aria-expanded="true" aria-controls="collapseMusic">
+                                <h3>Musics</h3>
+                            </button>
+                        </h3>
+                    </div>
+                    <div id="collapseMusic" class="collapse show" aria-labelledby="headingMusic" data-parent="#accordion">
+                        <div class="card-body">
+                            <div class="responsive-card-deck">
+                                @foreach (var music in Model.Musics)
+                                {
+                                    @* <p>
+                                        <a asp-controller="Music" asp-action="Detail" asp-route-id="@music.Id">@music.Name</a>
+                                        </p> *@
+                                    @await Html.PartialAsync("_MusicCard", music)
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        }
+        @if (Model.Albums != null && Model.Albums.Any())
+        {
+            ViewData["IsAllEmpty"] = false;
+            <section id="albums">
+                <div class="card">
+                    <div class="card-header" id="headingAlbum">
+                        <h3 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseAlbum"
+                            aria-expanded="true" aria-controls="collapseAlbum">
+                                <h3>Albums</h3>
+                            </button>
+                        </h3>
+                    </div>
+                    <div id="collapseAlbum" class="collapse show" aria-labelledby="headingAlbum" data-parent="#accordion">
+                        <div class="card-body">
+                            <div class="responsive-card-deck">
+                                @foreach (var album in Model.Albums)
+                                {
+                                    <p>
+                                        <a asp-controller="Album" asp-action="Detail" asp-route-id="@album.Id">@album.Name</a>
+                                    </p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        }
+        @if (Model.Artists != null && Model.Artists.Any())
+        {
+            ViewData["IsAllEmpty"] = false;
+            <section id="artists">
+                <div class="card">
+                    <div class="card-header" id="headingArtists">
+                        <h3 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseArtists"
+                            aria-expanded="true" aria-controls="collapseArtists">
+                                <h3>Artists</h3>
+                            </button>
+                        </h3>
+                    </div>
+                    <div id="collapseArtists" class="collapse show" aria-labelledby="headingArtists"
+                    data-parent="#accordion">
+                        <div class="card-body">
+                            <div class="responsive-card-deck">
+                                @foreach (var artist in Model.Artists)
+                                {
+                                    <p>
+                                        <a asp-controller="Search" asp-action="SearchByArtist"
+                                    asp-route-id="@artist.Id">@artist.Name</a>
+                                    </p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        }
+        @if (Model.Genres != null && Model.Genres.Any())
+        {
+            ViewData["IsAllEmpty"] = false;
+            <section id="genres">
+                <div class="card">
+                    <div class="card-header" id="headingGenres">
+                        <h3 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseGenres"
+                            aria-expanded="true" aria-controls="collapseGenres">
+                                <h3>Genres</h3>
+                            </button>
+                        </h3>
+                    </div>
+                    <div id="collapseGenres" class="collapse show" aria-labelledby="headingGenres" data-parent="#accordion">
+                        <div class="card-body">
+                            <div class="responsive-card-deck">
+                                @foreach (var genre in Model.Genres)
+                                {
+                                    <p>
+                                        <a asp-controller="Search" asp-action="SearchByGenre"
+                                    asp-route-genreName="@genre.Name">@genre.Name</a>
+                                    </p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        }
+        @if (Model.MusicsByLanguage != null && Model.MusicsByLanguage.Any())
+        {
+            ViewData["IsAllEmpty"] = false;
+            <section id="musicsByLanguage">
+                <div class="card">
+                    <div class="card-header" id="headingMusicByLanguage">
+                        <h3 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseMusicByLanguage"
+                            aria-expanded="true" aria-controls="collapseMusicByLanguage">
+                                <h3>Musics By Language</h3>
+                            </button>
+                        </h3>
+                    </div>
+                    <div id="collapseMusicByLanguage" class="collapse show" aria-labelledby="headingMusicByLanguage"
+                    data-parent="#accordion">
+                        <div class="card-body">
+                            <div class="responsive-card-deck">
+                                @foreach (var music in Model.MusicsByLanguage)
+                                {
+                                    <p>
+                                        <a asp-controller="Music" asp-action="Detail" asp-route-id="@music.Id">@music.Name
+                                            (@music.Language)</a>
+                                    </p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        }
+    </div>
     @* If all empty *@
     @if ((bool)ViewData["IsAllEmpty"])
     {

@@ -26,6 +26,9 @@ namespace OnlineMusicStore.ViewModels
         public string Language { get; set; }
 
         [Required]
+        public double Price { get; set; }
+
+        [Required]
         [Display(Name = "Image Url")]
         public string ImageUrl { get; set; }
 
@@ -70,6 +73,7 @@ namespace OnlineMusicStore.ViewModels
             ImageUrl = music.ImageUrl;
             DateReleased = music.DateReleased;
             GenreId = music.GenreId;
+            Price = music.Price;
             SelectedArtistIds = music.Artists.Select(ar => ar.Id).ToList();
             // AlbumId = music.AlbumId;
         }
@@ -84,6 +88,7 @@ namespace OnlineMusicStore.ViewModels
                 ImageUrl = ImageUrl,
                 DateReleased = DateReleased,
                 GenreId = GenreId,
+                Price = Price,
                 Artists = new HashSet<Artist>() // Populated in Controller
                 // AlbumId = AlbumId ?? 0
             };

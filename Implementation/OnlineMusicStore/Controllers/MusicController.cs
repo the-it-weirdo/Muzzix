@@ -132,6 +132,7 @@ namespace OnlineMusicStore.Controllers
                 musicFromDb.GenreId = music.GenreId;
                 musicFromDb.DateReleased = music.DateReleased;
                 musicFromDb.Artists = music.Artists;
+                musicFromDb.Price = music.Price;
 
             }
             await _dbContext.SaveChangesAsync();

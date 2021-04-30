@@ -30,6 +30,10 @@
                     <small class="text-muted">Genre:</small>
                     <span>@Model.Genre.Name</span>
                 </p>
+                <p>
+                    <small class="text-muted">Price:</small>
+                    <span><i class="fas fa-rupee-sign"></i> @Model.Price</span>
+                </p>
                 @if (Model.Album != null)
                 {
                     <p>
@@ -50,6 +54,9 @@
                     {
                         <span class="badge badge-pill badge-warning">New Release</span>
                     }
+                </p>
+                <p>
+                    <a class="btn btn-success" asp-controller="Cart" asp-action="AddMusicToCart" asp-route-musicId="@Model.Id"><i class="fas fa-cart-plus"></i>&nbsp;Add to Cart</a>
                 </p>
             </div>
         </div>

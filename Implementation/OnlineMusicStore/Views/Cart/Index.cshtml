@@ -1,7 +1,16 @@
-﻿@{
+﻿@model IEnumerable<OnlineMusicStore.Models.Music>
+@{
     ViewData["Title"] = "Cart";
 }
 
 <div class="text-center">
     <h1 class="display-4">My Cart</h1>
+
+    @if(Model != null)
+    {
+        foreach(var music in Model)
+        {
+            <p>@music.Name has been added to Cart.</p>
+        }
+    }
 </div>

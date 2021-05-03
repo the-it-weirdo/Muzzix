@@ -15,17 +15,22 @@
 <body>
     @await Html.PartialAsync("_Header")
     <div class="container">
-        <main role="main" class="pb-2">
+        <main role="main" class="pb-3">
             @RenderBody()
         </main>
+
+        <footer id="footer" class="border-top text-muted">
+            <div class="row">
+                <div class="col-lg-12">
+                    <p class="float-lg-right"><a href="#top">Back to top</a></p>
+                    <p>&copy; @DateTime.Now.Year - Muzzix</p>
+                </div>
+                @* <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> *@
+            </div>
+        </footer>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; @DateTime.Now.Year - Muzzix
-            @* <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> *@
-        </div>
-    </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

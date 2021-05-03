@@ -25,6 +25,7 @@ namespace OnlineMusicStore.Controllers
             _dbContext = context;
         }
 
+        [Authorize(Roles = UserRoles.AdminRole)]
         public IActionResult Index()
         {
             var artists = _dbContext.Artists.ToList();

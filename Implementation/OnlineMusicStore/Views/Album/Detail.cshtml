@@ -28,7 +28,7 @@
                     @foreach (var artist in @Model.Artists)
                     {
                         <li class="list-group-item">
-                            @await Html.PartialAsync("_ArtistDisplay", artist)
+                            @await Html.PartialAsync("_ArtistCard", artist)
                         </li>
                     }
                 </ul>

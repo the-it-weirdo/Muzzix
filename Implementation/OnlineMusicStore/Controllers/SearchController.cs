@@ -27,14 +27,14 @@ namespace OnlineMusicStore.Controllers
             _repository = new SearchRepository(context);
         }
 
-        public IActionResult SearchByLanguage(string language)
+        public IActionResult SearchByLanguage(string language = "")
         {
             _logger.LogInformation(language);
 
             return View("SearchResults", new SearchViewModel
             {
-                QueryString = $"Musics in {language}.",
-                Musics = _repository.SearchByLanguage(language)
+                QueryString = language == "" ? "All Language" : $"Musics in {language}.",
+                MusicsByLanguage = _repository.SearchByLanguage(language)
             });
         }
 
@@ -79,47 +79,57 @@ namespace OnlineMusicStore.Controllers
             });
         }
 
+        public IActionResult SearchDefault()
+        {
+            var viewModel = new SearchViewModel()
+            {
+                Musics = _repository.SearchMusics(),
+                Albums = _repository.SearchAlbums(),
+                Artists = _repository.SearchArtists(),
+                Genres = _repository.SearchGenres()
+            };
+            return View("SearchResults", viewModel);
+        }
+
         public IActionResult SearchAll(string allType)
         {
-            var viewModel = new SearchViewModel();
-            viewModel.QueryString = $"All {allType}";
+            List<object> items;
             switch (allType)
             {
                 case "Artist":
                     {
-                        viewModel.Artists = _repository.SearchArtists();
+                        items = _repository.SearchArtists().ConvertAll(x => (object)x);
+                        ViewData["AllType"] = "Artists";
                         break;
                     }
                 case "Album":
                     {
-                        viewModel.Albums = _repository.SearchAlbums();
+                        items = _repository.SearchAlbums().ConvertAll(x => (object)x);
+                        ViewData["AllType"] = "Albums";
                         break;
                     }
                 case "Music":
                     {
-                        viewModel.Musics = _repository.SearchMusics();
+                        items = _repository.SearchMusics().ConvertAll(x => (object)x);
+                        ViewData["AllType"] = "Musics";
                         break;
                     }
                 case "Genre":
                     {
-                        viewModel.Genres = _repository.SearchGenres();
+                        items = _repository.SearchGenres().ConvertAll(x => (object)x);
+                        ViewData["AllType"] = "Genres";
                         break;
                     }
                 case "Language":
                     {
-                        viewModel.MusicsByLanguage = _repository.SearchByLanguage();
-                        break;
+                        return RedirectToAction("SearchByLanguage", "Search");
                     }
                 default:
                     {
-                        viewModel.Musics = _repository.SearchMusics();
-                        viewModel.Albums = _repository.SearchAlbums();
-                        viewModel.Artists = _repository.SearchArtists();
-                        viewModel.Genres = _repository.SearchGenres();
-                        break;
+                        return RedirectToAction("SearchDefault", "Search");
                     }
             }
-            return View("SearchResults", viewModel);
+            return View(items);
         }
     }
 }

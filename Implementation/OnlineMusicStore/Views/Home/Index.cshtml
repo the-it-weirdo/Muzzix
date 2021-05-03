@@ -3,13 +3,134 @@
     ViewData["Title"] = "Home Page";
 }
 
-@await Html.PartialAsync("_Carousel", Model)
+<style>
+    /* Featurettes
+    ------------------------- */
+    .featurette-divider {
+        margin: 5rem 0;
+        /* Space out the Bootstrap <hr> more */
+    }
 
-<div class="row">
-    @foreach (var music in Model)
+    /* Thin out the marketing headings */
+    .featurette-heading {
+        font-weight: 300;
+        line-height: 1;
+        /* rtl:remove */
+        letter-spacing: -.05rem;
+    }
+
+    .carousel {
+        margin-bottom: 4rem;
+    }
+</style>
+
+<section>
+    @await Html.PartialAsync("_Carousel", Model)
+</section>
+
+<h3>Checkout our most recent additions</h3>
+@for (int i = 0; i < Model.Count; i++)
+{
+    if (i == 0)
     {
-        <div class="col-sm">
-            @await Html.PartialAsync("_MusicCard", music)
+        <hr />
+    }
+    else
+    {
+        <hr class="featurette-divider" />
+    }
+    if (i % 2 == 0)
+    {
+        <div class="row featurette m-1">
+            <div class="col-md-7">
+                <h2 class="featurette-heading">@Model[i].Name
+                </h2>
+                <p class="lead">
+                <p><span class="text-muted">Genre: </span>@Model[i].Genre.Name</p>
+                <p><span class="text-muted">Language: </span>@Model[i].Language</p>
+                <p><span class="text-muted">Price: </span><i class="fas fa-rupee-sign"></i> @Model[i].Price</p>
+                    @if (Model[i].DateAdded.HasValue)
+                    {
+                    <p><span class="text-muted">Added on: </span>@Model[i].DateAdded.Value.ToShortDateString()</p>
+                    }
+                </p>
+                @if (Model[i].IsRecentlyAdded() || Model[i].IsRecentlyReleased())
+                {
+                    <p>
+                        @if (Model[i].IsRecentlyAdded())
+                        {
+                            <span class="badge badge-pill badge-warning">Recent Addition</span>
+                        }
+                        @if (Model[i].IsRecentlyReleased())
+                        {
+                            <span class="badge badge-pill badge-warning">New Release</span>
+                        }
+                    </p>
+                }
+                <p>
+                    <span class="badge">
+                        <a class="btn btn-secondary" asp-controller="Music" asp-action="Detail" asp-route-id="@Model[i].Id"
+                    class="card-link">Check
+                            Details</a>
+                    </span>
+                    <span class="badge">
+                        <a class="btn btn-success" asp-controller="Cart" asp-action="AddMusicToCart"
+                    asp-route-musicId="@Model[i].Id"><i class="fas fa-cart-plus"></i>&nbsp;Add to Cart</a>
+                    </span>
+                </p>
+            </div>
+            <div class="col-md-5">
+                <img class="featurette-image rounded img-fluid mx-auto" src="@Model[i].ImageUrl" width="400" height="400"
+            aria-label="@Model[i].Name" alt="@Model[i].Name" />
+
+            </div>
         </div>
     }
-</div>
+    else
+    {
+        <div class="row featurette m-1">
+            <div class="col-md-7 order-md-2">
+                <h2 class="featurette-heading">@Model[i].Name
+                </h2>
+                <p class="lead">
+                <p><span class="text-muted">Genre: </span>@Model[i].Genre.Name</p>
+                <p><span class="text-muted">Language: </span>@Model[i].Language</p>
+                <p><span class="text-muted">Price: </span><i class="fas fa-rupee-sign"></i> @Model[i].Price</p>
+                    @if (Model[i].DateAdded.HasValue)
+                    {
+                    <p><span class="text-muted">Added on: </span>@Model[i].DateAdded.Value.ToShortDateString()</p>
+                    }
+                </p>
+                @if (Model[i].IsRecentlyAdded() || Model[i].IsRecentlyReleased())
+                {
+                    <p>
+                        @if (Model[i].IsRecentlyAdded())
+                        {
+                            <span class="badge badge-pill badge-warning">Recent Addition</span>
+                        }
+                        @if (Model[i].IsRecentlyReleased())
+                        {
+                            <span class="badge badge-pill badge-warning">New Release</span>
+                        }
+                    </p>
+                }
+                <p>
+                    <span class="badge">
+                        <a class="btn btn-secondary" asp-controller="Music" asp-action="Detail" asp-route-id="@Model[i].Id"
+                    class="card-link">Check
+                            Details</a>
+                    </span>
+                    <span class="badge">
+                        <a class="btn btn-success" asp-controller="Cart" asp-action="AddMusicToCart"
+                    asp-route-musicId="@Model[i].Id"><i class="fas fa-cart-plus"></i>&nbsp;Add to Cart</a>
+                    </span>
+                </p>
+            </div>
+            <div class="col-md-5 order-md-1">
+                <img class="featurette-image rounded img-fluid mx-auto" src="@Model[i].ImageUrl" width="400" height="400"
+            aria-label="@Model[i].Name" alt="@Model[i].Name" />
+
+            </div>
+        </div>
+    }
+}

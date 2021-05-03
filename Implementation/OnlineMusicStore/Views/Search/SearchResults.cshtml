@@ -3,17 +3,6 @@
     ViewData["Title"] = "Search";
     ViewData["IsAllEmpty"] = true;
 }
-<style>
-    a.anchor-card,
-    a.anchor-card:hover {
-        color: inherit;
-        text-decoration: none;
-    }
-
-    .link-card:hover {
-        background-color: lightgray;
-    }
-</style>
 
 <section>
     <h1 class="display-4">Search Results</h1>
@@ -64,20 +53,7 @@
                             <div class="responsive-card-deck">
                                 @foreach (var album in Model.Albums)
                                 {
-                                    <a class="anchor-card" asp-controller="Album" asp-action="Detail" asp-route-id="@album.Id">
-                                        <div class="card link-card" style="max-width: 400px">
-                                            <div class="row">
-                                                <div class="col-sm-4">
-                                                    <img src="@album.ImageUrl" alt="@album.Name" class="img-thumbnail">
-                                                </div>
-                                                <div class="col-sm-8">
-                                                    <div class="card-body">
-                                                        <p class="card-text">@album.Name</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
+                                    @await Html.PartialAsync("_AlbumCard", album)
                                 }
                             </div>
                         </div>
@@ -104,14 +80,8 @@
                             <div class="responsive-card-deck">
                                 @foreach (var artist in Model.Artists)
                                 {
-                                    <a class="anchor-card" asp-controller="Search" asp-action="SearchByArtist"
-                                asp-route-id="@artist.Id">
-                                        <div class="card link-card">
-                                            <div class="card-body">
-                                                @await Html.PartialAsync("_ArtistDisplay", artist)
-                                            </div>
-                                        </div>
-                                    </a>
+                                    @await Html.PartialAsync("_ArtistCard", artist)
+
                                 }
                             </div>
                         </div>

@@ -24,7 +24,9 @@
     }
 </style>
 
-@await Html.PartialAsync("_Carousel", Model)
+<section>
+    @await Html.PartialAsync("_Carousel", Model)
+</section>
 
 <h3>Checkout our most recent additions</h3>
 @for (int i = 0; i < Model.Count; i++)
@@ -39,14 +41,14 @@
     }
     if (i % 2 == 0)
     {
-        <div class="row featurette">
+        <div class="row featurette m-1">
             <div class="col-md-7">
                 <h2 class="featurette-heading">@Model[i].Name
                 </h2>
                 <p class="lead">
                 <p><span class="text-muted">Genre: </span>@Model[i].Genre.Name</p>
                 <p><span class="text-muted">Language: </span>@Model[i].Language</p>
-                <p><span class="text-muted">Price: </span>@Model[i].Price</p>
+                <p><span class="text-muted">Price: </span><i class="fas fa-rupee-sign"></i> @Model[i].Price</p>
                     @if (Model[i].DateAdded.HasValue)
                     {
                     <p><span class="text-muted">Added on: </span>@Model[i].DateAdded.Value.ToShortDateString()</p>
@@ -67,7 +69,8 @@
                 }
                 <p>
                     <span class="badge">
-                        <a class="btn btn-primary" asp-controller="Music" asp-action="Detail" asp-route-id="@Model[i].Id" class="card-link">Check
+                        <a class="btn btn-secondary" asp-controller="Music" asp-action="Detail" asp-route-id="@Model[i].Id"
+                    class="card-link">Check
                             Details</a>
                     </span>
                     <span class="badge">
@@ -85,14 +88,14 @@
     }
     else
     {
-        <div class="row featurette">
+        <div class="row featurette m-1">
             <div class="col-md-7 order-md-2">
                 <h2 class="featurette-heading">@Model[i].Name
                 </h2>
                 <p class="lead">
                 <p><span class="text-muted">Genre: </span>@Model[i].Genre.Name</p>
                 <p><span class="text-muted">Language: </span>@Model[i].Language</p>
-                <p><span class="text-muted">Price: </span>@Model[i].Price</p>
+                <p><span class="text-muted">Price: </span><i class="fas fa-rupee-sign"></i> @Model[i].Price</p>
                     @if (Model[i].DateAdded.HasValue)
                     {
                     <p><span class="text-muted">Added on: </span>@Model[i].DateAdded.Value.ToShortDateString()</p>
@@ -113,7 +116,8 @@
                 }
                 <p>
                     <span class="badge">
-                        <a class="btn btn-primary" asp-controller="Music" asp-action="Detail" asp-route-id="@Model[i].Id" class="card-link">Check
+                        <a class="btn btn-secondary" asp-controller="Music" asp-action="Detail" asp-route-id="@Model[i].Id"
+                    class="card-link">Check
                             Details</a>
                     </span>
                     <span class="badge">

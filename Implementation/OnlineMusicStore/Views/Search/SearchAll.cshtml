@@ -1,0 +1,38 @@
+@model IEnumerable<object>
+@{
+  ViewData["Title"] = "Search All";
+}
+
+<h5 class="m-2">All @ViewData["AllType"]</h5>
+<hr />
+<div class="album py-5 bg-light">
+  <div class="container">
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      @foreach (var item in Model)
+      {
+        @if (item is OnlineMusicStore.Models.Music)
+        {
+          @await Html.PartialAsync("_MusicCard", item)
+        }
+        else if (item is OnlineMusicStore.Models.Album)
+        {
+          @await Html.PartialAsync("_AlbumCard", item)
+        }
+        else if (item is OnlineMusicStore.Models.Artist)
+        {
+          @await Html.PartialAsync("_ArtistCard", item)
+        }
+        else if (item is OnlineMusicStore.Models.Genre)
+        {
+          <div class="col">
+            <span class="m-1">
+              <a asp-controller="Search" asp-action="SearchByGenre"
+            asp-route-genreName="@(((OnlineMusicStore.Models.Genre)item).Name)">@(((OnlineMusicStore.Models.Genre)item).Name)</a>
+            </span>
+          </div>
+        }
+      }
+    </div>
+  </div>
+</div>

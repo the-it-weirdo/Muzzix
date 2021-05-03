@@ -1,0 +1,19 @@
+@using OnlineMusicStore.Helpers;
+@model OnlineMusicStore.Models.Artist
+
+<div class="col">
+    <div class="card shadow-sm m-1">
+        <div class="card-header"><i class="fas fa-user"></i></div>
+        <div class="card-body">
+            <h5 class="card-title">@Model.Name</h5>
+            <p class="card-text"><span class="@Html.GetCSSClass(@Model.Rating)">@Model.Rating <i
+                        class="fas fa-star"></i></span></p>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                    <a class="btn btn-outline-primary btn-sm" asp-controller="Search" asp-action="SearchByArtist"
+                                asp-route-id="@Model.Id">Works of @Model.Name</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

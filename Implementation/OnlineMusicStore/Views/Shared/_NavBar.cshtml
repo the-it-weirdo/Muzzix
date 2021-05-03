@@ -41,6 +41,8 @@
                         aria-expanded="false"><i class="fas fa-music"></i> Find your music</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" asp-controller="Search" asp-action="SearchAll"
+                        asp-route-allType="Music"><i class="fas fa-music"></i> Musics</a>
+                            <a class="dropdown-item" asp-controller="Search" asp-action="SearchAll"
                         asp-route-allType="Artist"><i class="fas fa-user"></i> Artist</a>
                             <a class="dropdown-item" asp-controller="Search" asp-action="SearchAll" asp-route-allType="Album"><i
                                 class="fas fa-record-vinyl"></i> Album</a>

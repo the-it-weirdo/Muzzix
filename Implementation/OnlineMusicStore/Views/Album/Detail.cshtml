@@ -27,9 +27,8 @@
                 <ul class="list-group">
                     @foreach (var artist in @Model.Artists)
                     {
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            @artist.Name
-                            <span class="badge rounded-pill bg-success">@artist.Rating</span>
+                        <li class="list-group-item">
+                            @await Html.PartialAsync("_ArtistDisplay", artist)
                         </li>
                     }
                 </ul>

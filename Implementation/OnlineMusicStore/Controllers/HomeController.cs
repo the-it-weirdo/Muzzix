@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using OnlineMusicStore.Data;
 using OnlineMusicStore.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace OnlineMusicStore.Controllers
 {
@@ -24,13 +25,17 @@ namespace OnlineMusicStore.Controllers
 
         public IActionResult Index()
         {
-            var recentMusicUrls = _dbContext.Musics
-            .ToList()
-            .Where(m => m.IsRecentlyAdded() && m.IsRecentlyReleased())
-            .ToList();
+            // var recentMusicUrls = (from music in _dbContext.Musics orderby music.DateAdded select music).Take(3);
 
-            _logger.LogInformation($"In Index: {recentMusicUrls.Count}");
-            return View(recentMusicUrls);
+            var recentMusicUrls = _dbContext.Musics
+            .Include(m => m.Artists)
+            .Include(m => m.Album)
+            .Include(m => m.Genre)
+            .OrderByDescending(m => m.DateAdded)
+            .Take(3);
+
+            _logger.LogInformation($"In Index: {recentMusicUrls.Count()}");
+            return View(recentMusicUrls.ToList());
         }
 
         public IActionResult About()

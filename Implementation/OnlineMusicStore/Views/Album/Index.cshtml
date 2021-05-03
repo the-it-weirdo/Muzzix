@@ -2,7 +2,8 @@
 @{
     ViewData["Title"] = "Albums";
 }
-
+@* for data table plugin *@
+<link href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet" />
 <section>
     <h1 class="display-4">Albums</h1>
     @if (User.IsInRole(OnlineMusicStore.Models.UserRoles.AdminRole))
@@ -11,7 +12,7 @@
     }
     @if (Model.Any())
     {
-        <table class="table table-bordered">
+        <table class="table table-bordered" id="albumsTable">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -49,3 +50,13 @@
         <p class="text-error">No Albums available. Add an Album to show.</p>
     }
 </section>
+
+@section Scripts {
+@* for data table *@
+<script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#albumsTable').DataTable();
+    });
+</script>
+}

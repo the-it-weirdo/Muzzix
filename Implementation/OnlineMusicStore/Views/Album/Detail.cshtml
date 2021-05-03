@@ -4,33 +4,51 @@
 }
 
 <section>
-    <h1 class="display-4">Album Details</h1>
-    <h2 class="display-3">@Model.Name</h2>
+    <h3 class="display-4">Album Details</h3>
     <hr />
-    <p>
-        <span>Artists: (Total: @Model.Artists.Count())<br />
-            @foreach (var artist in Model.Artists)
-            {
-                <span>@artist.Name</span><span>(@artist.Rating)</span>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                <img src="@Model.ImageUrl" class="img-fluid rounded" alt="@Model.Name">
+            </div>
+            <div class="col-md-10">
+                <h2 class="display-3">@Model.Name</h2>
+                <p class="m-1">
+                    <a class="btn btn-success" asp-controller="Cart" asp-action="AddAlbumToCart"
+                        asp-route-albumId="@Model.Id"><i class="fas fa-cart-plus"></i>&nbsp;Add to Cart</a>
+                </p>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-6">
+                <h4 class="mb-1">Artists: (Total: @Model.Artists.Count())</h4>
                 <br />
-            }
-        </span>
-        <span>Musics: (Total: @Model.Musics.Count())<br />
-            @foreach (var music in Model.Musics)
-            {
-                <span>@music.Name</span><span>(@music.Genre.Name)</span>
+                <ul class="list-group">
+                    @foreach (var artist in @Model.Artists)
+                    {
+                        <li class="list-group-item">
+                            @await Html.PartialAsync("_ArtistDisplay", artist)
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h4 class="mb-1">Musics: (Total: @Model.Musics.Count())</h4>
                 <br />
-            }
-        </span>
-        @* <span>Genres: (Total: @Model.Genres.Count())<br />
-            @foreach (var genre in Model.Genres)
-            {
-                <span>@genre.Name</span>
-                <br />
-            }
-        </span> *@
-    </p>
-    <p>
-        <a class="btn btn-success" asp-controller="Cart" asp-action="AddAlbumToCart" asp-route-albumId="@Model.Id"><i class="fas fa-cart-plus"></i>&nbsp;Add to Cart</a>
-    </p>
+                @foreach (var music in @Model.Musics)
+                {
+                    <a class="list-group-item list-group-item-action" asp-controller="Music" asp-action="Detail"
+                    asp-route-id="@music.Id">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">@music.Name</h5>
+                            <small class="text-muted">@music.DateReleased.ToShortDateString()</small>
+                        </div>
+                        <p class="mb-1">@music.Language</p>
+                        <small class="text-muted">@music.Genre.Name</small>
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
 </section>

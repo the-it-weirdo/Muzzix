@@ -3,6 +3,17 @@
     ViewData["Title"] = "Search";
     ViewData["IsAllEmpty"] = true;
 }
+<style>
+    a.anchor-card,
+    a.anchor-card:hover {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    .link-card:hover {
+        background-color: lightgray;
+    }
+</style>
 
 <section>
     <h1 class="display-4">Search Results</h1>
@@ -18,7 +29,7 @@
                         <h3 class="mb-0">
                             <button class="btn btn-link" data-toggle="collapse" data-target="#collapseMusic"
                             aria-expanded="true" aria-controls="collapseMusic">
-                                <h3>Musics</h3>
+                                <h3><i class="fas fa-music"></i> Musics</h3>
                             </button>
                         </h3>
                     </div>
@@ -27,9 +38,6 @@
                             <div class="responsive-card-deck">
                                 @foreach (var music in Model.Musics)
                                 {
-                                    @* <p>
-                                        <a asp-controller="Music" asp-action="Detail" asp-route-id="@music.Id">@music.Name</a>
-                                        </p> *@
                                     @await Html.PartialAsync("_MusicCard", music)
                                 }
                             </div>
@@ -47,7 +55,7 @@
                         <h3 class="mb-0">
                             <button class="btn btn-link" data-toggle="collapse" data-target="#collapseAlbum"
                             aria-expanded="true" aria-controls="collapseAlbum">
-                                <h3>Albums</h3>
+                                <h3><i class="fas fa-record-vinyl"></i> Albums</h3>
                             </button>
                         </h3>
                     </div>
@@ -56,9 +64,20 @@
                             <div class="responsive-card-deck">
                                 @foreach (var album in Model.Albums)
                                 {
-                                    <p>
-                                        <a asp-controller="Album" asp-action="Detail" asp-route-id="@album.Id">@album.Name</a>
-                                    </p>
+                                    <a class="anchor-card" asp-controller="Album" asp-action="Detail" asp-route-id="@album.Id">
+                                        <div class="card link-card" style="max-width: 400px">
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <img src="@album.ImageUrl" alt="@album.Name" class="img-thumbnail">
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <div class="card-body">
+                                                        <p class="card-text">@album.Name</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
                                 }
                             </div>
                         </div>
@@ -75,7 +94,7 @@
                         <h3 class="mb-0">
                             <button class="btn btn-link" data-toggle="collapse" data-target="#collapseArtists"
                             aria-expanded="true" aria-controls="collapseArtists">
-                                <h3>Artists</h3>
+                                <h3><i class="fas fa-user"></i> Artists</h3>
                             </button>
                         </h3>
                     </div>
@@ -85,10 +104,14 @@
                             <div class="responsive-card-deck">
                                 @foreach (var artist in Model.Artists)
                                 {
-                                    <p>
-                                        <a asp-controller="Search" asp-action="SearchByArtist"
-                                    asp-route-id="@artist.Id">@artist.Name</a>
-                                    </p>
+                                    <a class="anchor-card" asp-controller="Search" asp-action="SearchByArtist"
+                                asp-route-id="@artist.Id">
+                                        <div class="card link-card">
+                                            <div class="card-body">
+                                                @await Html.PartialAsync("_ArtistDisplay", artist)
+                                            </div>
+                                        </div>
+                                    </a>
                                 }
                             </div>
                         </div>
@@ -105,21 +128,19 @@
                         <h3 class="mb-0">
                             <button class="btn btn-link" data-toggle="collapse" data-target="#collapseGenres"
                             aria-expanded="true" aria-controls="collapseGenres">
-                                <h3>Genres</h3>
+                                <h3><i class="fas fa-tags"></i> Genres</h3>
                             </button>
                         </h3>
                     </div>
                     <div id="collapseGenres" class="collapse show" aria-labelledby="headingGenres" data-parent="#accordion">
                         <div class="card-body">
-                            <div class="responsive-card-deck">
-                                @foreach (var genre in Model.Genres)
-                                {
-                                    <p>
-                                        <a asp-controller="Search" asp-action="SearchByGenre"
-                                    asp-route-genreName="@genre.Name">@genre.Name</a>
-                                    </p>
-                                }
-                            </div>
+                            @foreach (var genre in Model.Genres)
+                            {
+                                <span class="m-1">
+                                    <a asp-controller="Search" asp-action="SearchByGenre"
+                                asp-route-genreName="@genre.Name">@genre.Name</a>
+                                </span>
+                            }
                         </div>
                     </div>
                 </div>
@@ -134,22 +155,20 @@
                         <h3 class="mb-0">
                             <button class="btn btn-link" data-toggle="collapse" data-target="#collapseMusicByLanguage"
                             aria-expanded="true" aria-controls="collapseMusicByLanguage">
-                                <h3>Musics By Language</h3>
+                                <h3><i class="fas fa-language"></i> Musics By Language</h3>
                             </button>
                         </h3>
                     </div>
                     <div id="collapseMusicByLanguage" class="collapse show" aria-labelledby="headingMusicByLanguage"
                     data-parent="#accordion">
                         <div class="card-body">
-                            <div class="responsive-card-deck">
-                                @foreach (var music in Model.MusicsByLanguage)
-                                {
-                                    <p>
-                                        <a asp-controller="Music" asp-action="Detail" asp-route-id="@music.Id">@music.Name
-                                            (@music.Language)</a>
-                                    </p>
-                                }
-                            </div>
+                            @foreach (var music in Model.MusicsByLanguage)
+                            {
+                                <p>
+                                    <a asp-controller="Music" asp-action="Detail" asp-route-id="@music.Id">@music.Name
+                                        (@music.Language)</a>
+                                </p>
+                            }
                         </div>
                     </div>
                 </div>

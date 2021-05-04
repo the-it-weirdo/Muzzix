@@ -14,6 +14,8 @@ namespace OnlineMusicStore.Data
         public DbSet<Artist> Artists { get; set; }
         public DbSet<Album> Albums { get; set; }
         public DbSet<Genre> Genres { get; set; }
+        public DbSet<Request> Requests { get; set; }
+        public DbSet<Feedback> Feedbacks { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {

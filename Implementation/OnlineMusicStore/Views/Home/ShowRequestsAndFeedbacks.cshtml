@@ -1,0 +1,79 @@
+@model IEnumerable<OnlineMusicStore.Models.IContantEntity>
+@using OnlineMusicStore.Models
+@using OnlineMusicStore.ViewModels;
+
+@if (ViewData["Type"] is ContactFormType.REQUEST)
+{
+    ViewData["Title"] = "Requests";
+}
+else if (ViewData["Type"] is ContactFormType.FEEDBACK)
+{
+    ViewData["Title"] = "Feedbacks";
+}
+else
+{
+    ViewData["Title"] = "Show"; // is it required ?
+}
+
+@* for data table plugin *@
+<link href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet" />
+
+<h1>All @ViewData["Title"]</h1>
+
+<section>
+    @if (Model.Any())
+    {
+        <table class="table table-bordered" id="reqOrFeedTable">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    @if (ViewData["Type"] is ContactFormType.REQUEST)
+                    {
+                        <th>Request For</th>
+                    }
+                    else if (ViewData["Type"] is ContactFormType.FEEDBACK)
+                    {
+                        <th>Rating</th>
+                    }
+                    <th>Message</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    @foreach (var item in Model)
+                    {
+                        <td>@item.Id</td>
+                        <td>@item.Name</td>
+                        <td>@item.Email</td>
+                        if (item is Feedback)
+                        {
+                            <td>@(((Feedback)item).Rating)</td>
+                            <td>@(((Feedback)item).FeedbackMessage)</td>
+                        }
+                        else if (item is Request)
+                        {
+                            <td>@(((Request)item).RequestType.ToString())</td>
+                            <td>@(((Request)item).RequestMessage)</td>
+                        }
+                    }
+                </tr>
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <h3>No data available.</h3>
+    }
+</section>
+
+@section Scripts {
+@* for data table *@
+<script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#reqOrFeedTable').DataTable();
+    });
+</script>
+}

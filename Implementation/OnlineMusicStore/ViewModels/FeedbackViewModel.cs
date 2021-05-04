@@ -1,11 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace OnlineMusicStore.Models
+namespace OnlineMusicStore.ViewModels
 {
-    public class Feedback : IContantEntity
+    public class FeedbackViewModel
     {
-        public int Id { get; set; }
-
         [Required]
         public string Name { get; set; }
 
@@ -15,6 +13,7 @@ namespace OnlineMusicStore.Models
         [Required]
         public float Rating { get; set; }
 
+        [Display(Name = "Feedback Message")]
         [Required]
         public string FeedbackMessage { get; set; }
     }

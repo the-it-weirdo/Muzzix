@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using OnlineMusicStore.Data;
 using OnlineMusicStore.Models;
+using OnlineMusicStore.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 
 namespace OnlineMusicStore.Controllers
@@ -45,7 +47,66 @@ namespace OnlineMusicStore.Controllers
 
         public IActionResult Contact()
         {
-            return View();
+            return View(new ContactUsViewModel()
+            {
+                FeedbackViewModel = new FeedbackViewModel(),
+                RequestViewModel = new RequestViewModel()
+            });
+        }
+
+        [Authorize(Roles = UserRoles.AdminRole)]
+        public IActionResult ShowFeedbacks()
+        {
+            var feedbacks = _dbContext.Feedbacks.ToList();
+            ViewData["Type"] = ContactFormType.FEEDBACK;
+            return View("ShowRequestsAndFeedbacks", feedbacks);
+        }
+
+        [Authorize(Roles = UserRoles.AdminRole)]
+        public IActionResult ShowRequests()
+        {
+            var requests = _dbContext.Requests.ToList();
+            ViewData["Type"] = ContactFormType.REQUEST;
+            return View("ShowRequestsAndFeedbacks", requests);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SubmitFeedback(FeedbackViewModel feedbackViewModel)
+        {
+            if (!ModelState.IsValid)
+                return View("Contact", feedbackViewModel);
+
+            var feedback = new Feedback()
+            {
+                Name = feedbackViewModel.Name,
+                Email = feedbackViewModel.Email,
+                Rating = feedbackViewModel.Rating,
+                FeedbackMessage = feedbackViewModel.FeedbackMessage
+            };
+
+            _dbContext.Feedbacks.Add(feedback);
+
+            await _dbContext.SaveChangesAsync();
+            return RedirectToAction("Contact", "Home");
+        }
+
+        public async Task<IActionResult> SubmitRequest(RequestViewModel requestViewModel)
+        {
+            if (!ModelState.IsValid)
+                return View("Contact", requestViewModel);
+
+            var request = new Request()
+            {
+                Name = requestViewModel.Name,
+                Email = requestViewModel.Email,
+                RequestType = requestViewModel.RequestType,
+                RequestMessage = requestViewModel.RequestMessage
+            };
+
+            _dbContext.Requests.Add(request);
+
+            await _dbContext.SaveChangesAsync();
+            return RedirectToAction("Contact", "Home");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

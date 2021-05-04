@@ -14,7 +14,7 @@ namespace OnlineMusicStore.Models
         Genre = 4
     }
 
-    public class Request
+    public class Request : IContantEntity
     {
         public int Id { get; set; }
 

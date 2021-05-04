@@ -40,8 +40,8 @@
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                         aria-expanded="false"><i class="fas fa-music"></i> Find your music</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" asp-controller="Search" asp-action="SearchAll"
-                        asp-route-allType="Music"><i class="fas fa-music"></i> Musics</a>
+                            <a class="dropdown-item" asp-controller="Search" asp-action="SearchAll" asp-route-allType="Music"><i
+                                class="fas fa-music"></i> Musics</a>
                             <a class="dropdown-item" asp-controller="Search" asp-action="SearchAll"
                         asp-route-allType="Artist"><i class="fas fa-user"></i> Artist</a>
                             <a class="dropdown-item" asp-controller="Search" asp-action="SearchAll" asp-route-allType="Album"><i
@@ -66,6 +66,20 @@
                     <li class="@Html.IsSelected("Home", "Contact", "nav-item active", "nav-item")">
                         <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact"><i
                             class="fas fa-envelope"></i> Contact Us</a>
+                    </li>
+                }
+                if (User.IsInRole(OnlineMusicStore.Models.UserRoles.AdminRole))
+                {
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                        aria-expanded="false"><i class="fas fa-table"></i> View Feedbacks/Requests</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" asp-controller="Home" asp-action="ShowFeedbacks"><i
+                                class="fas fa-comments"></i>
+                                View Feedbacks</a>
+                            <a class="dropdown-item" asp-controller="Home" asp-action="ShowRequests"><i class="fas fa-plus"></i>
+                                View Requests</a>
+                        </div>
                     </li>
                 }
             }

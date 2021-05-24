@@ -43,11 +43,6 @@ namespace OnlineMusicStore.Controllers
             return View(recentMusicUrls.ToList());
         }
 
-	public IActionResult Abstract()
-        {
-            return View();
-        }
-
         public IActionResult About()
         {
             return View();
@@ -115,6 +110,11 @@ namespace OnlineMusicStore.Controllers
 
             await _dbContext.SaveChangesAsync();
             return RedirectToAction("Contact", "Home");
+        }
+
+        public IActionResult Abstract()
+        {
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

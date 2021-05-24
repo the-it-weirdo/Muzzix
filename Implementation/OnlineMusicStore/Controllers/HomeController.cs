@@ -29,6 +29,9 @@ namespace OnlineMusicStore.Controllers
         {
             // var recentMusicUrls = (from music in _dbContext.Musics orderby music.DateAdded select music).Take(3);
 
+            if (User.IsInRole(UserRoles.AdminRole))
+                return View("IndexAdmin");
+
             var recentMusicUrls = _dbContext.Musics
             .Include(m => m.Artists)
             .Include(m => m.Album)

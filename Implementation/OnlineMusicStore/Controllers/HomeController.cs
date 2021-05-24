@@ -43,6 +43,11 @@ namespace OnlineMusicStore.Controllers
             return View(recentMusicUrls.ToList());
         }
 
+	public IActionResult Abstract()
+        {
+            return View();
+        }
+
         public IActionResult About()
         {
             return View();

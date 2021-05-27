@@ -1,0 +1,20 @@
+﻿<header class="page-footer">
+    @{
+        // NavBAr will always render
+        @await Html.PartialAsync("_Footbar")
+        @* try
+            {
+                string currentAction = Html.ViewContext.RouteData.Values["action"].ToString();
+                string currentController = Html.ViewContext.RouteData.Values["controller"].ToString();
+                if (currentAction == "Index" && currentController == "Home")
+                {
+                    // If in the Home page, render the Carousel
+                    @await Html.PartialAsync("_Carousel")
+                }
+            }
+            catch (Exception)
+            {
+                // Pass since there's nothing to render on Exception
+            } *@
+    }
+</header>

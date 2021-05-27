@@ -7,8 +7,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.16/css/bootstrap-multiselect.min.css" integrity="sha512-wHTuOcR1pyFeyXVkwg3fhfK46QulKXkLq1kxcEEpjnAPv63B/R49bBqkJHLvoGFq6lvAEKlln2rE1JfIPeQ+iw==" crossorigin="anonymous" />
 
 <h1>@Model.Title</h1>
-<section class="row">
-    <div class="col-md-4">
+<section class="row justify-content-center">
+    <div class="col-md-8">
         <form id="musicForm" asp-controller="Album" asp-action="Save" method="POST" onsubmit="return formSubmit()">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />

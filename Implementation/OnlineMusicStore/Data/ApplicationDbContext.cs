@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using OnlineMusicStore.Models;
@@ -16,6 +17,7 @@ namespace OnlineMusicStore.Data
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Request> Requests { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
+        public DbSet<IdentityUser> AllUsers { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {

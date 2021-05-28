@@ -1,23 +1,21 @@
 @using OnlineMusicStore.Helpers;
 <style>
-
     .navbar-customclass {
         background-color: #0a4275;
     }
 
-        .navbar-customclass .nav-link{
-            color: white;
-        }
-
+    .navbar-customclass .nav-link {
+        color: white;
+    }
 </style>
 <nav class="navbar navbar-expand-lg navbar-dark navbar-customclass">
     <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Muzzix</a>
-       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
-            aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
+        aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarColor02" >
+    <div class="collapse navbar-collapse" id="navbarColor02">
         <ul class="navbar-nav mr-auto">
             <li class="@Html.IsSelected("Home", "Index", "nav-item active", "nav-item")">
                 <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
@@ -35,7 +33,7 @@
                     if (User.IsInRole(OnlineMusicStore.Models.UserRoles.AdminRole))
                     {
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-                           aria-expanded="false"><i class="fas fa-database"></i> Manage Database</a>
+                        aria-expanded="false"><i class="fas fa-database"></i> Manage Database</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" asp-controller="Artist" asp-action="Index">
                                 <i class="fas fa-user"></i>
@@ -52,20 +50,23 @@
                                 <i class="fas fa-music"></i>
                                 Manage Music
                             </a>
-                            @* <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Separated link</a> *@
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" asp-controller="User" asp-action="Index">
+                                <i class="fas fa-database"></i>
+                                Manage Users
+                            </a>
                         </div>
                     }
                     else
                     {
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-                           aria-expanded="false"><i class="fas fa-music"></i> Find your music</a>
+                        aria-expanded="false"><i class="fas fa-music"></i> Find your music</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" asp-controller="Search" asp-action="SearchAll" asp-route-allType="Music">
                                 <i class="fas fa-music"></i> Musics
                             </a>
                             <a class="dropdown-item" asp-controller="Search" asp-action="SearchAll"
-                               asp-route-allType="Artist"><i class="fas fa-user"></i> Artist</a>
+                        asp-route-allType="Artist"><i class="fas fa-user"></i> Artist</a>
                             <a class="dropdown-item" asp-controller="Search" asp-action="SearchAll" asp-route-allType="Album">
                                 <i class="fas fa-record-vinyl"></i> Album
                             </a>
@@ -73,7 +74,7 @@
                                 <i class="fas fa-tags"></i> Genre
                             </a>
                             <a class="dropdown-item" asp-controller="Search" asp-action="SearchAll"
-                               asp-route-allType="Language"><i class="fas fa-language"></i> Language</a>
+                        asp-route-allType="Language"><i class="fas fa-language"></i> Language</a>
                             @* <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#">Separated link</a> *@
                         </div>
@@ -98,7 +99,7 @@
                 {
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-                           aria-expanded="false"><i class="fas fa-table"></i> View Feedbacks/Requests</a>
+                        aria-expanded="false"><i class="fas fa-table"></i> View Feedbacks/Requests</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" asp-controller="Home" asp-action="ShowFeedbacks">
                                 <i class="fas fa-comments"></i>

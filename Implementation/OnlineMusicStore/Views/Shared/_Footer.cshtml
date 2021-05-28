@@ -1,7 +1,52 @@
-﻿<header class="page-footer">
-    @{
-        // NavBAr will always render
-        @await Html.PartialAsync("_Footbar")
-        
+﻿<style>
+    .footer {
+        height: 20px;
+        margin-bottom: 40px;
     }
-</header>
+
+    .footer-colors {
+        background-color: #0a4275;
+        color: white;
+    }
+
+    .footer-font-size {
+        font-size: 15px;
+    }
+</style>
+<div class="footer footer-colors">
+    <footer class="page-footer bg-light text-lg-start">
+
+        <div class="container-fluid footer-colors">
+            <div class="row">
+                <div class="text-left col py-0 px-2 footer-font-size">
+                    &copy; @DateTime.Now.Year - Muzzix - Team 1
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col px-2">
+                    <a class="btn btn-outline-light btn-floating m-2 float-md-right footer-font-size" href="https://www.facebook.com/"
+                        role="button">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+
+                    <a class="btn btn-outline-light btn-floating m-2 float-md-right footer-font-size" href="https://twitter.com/"
+                        role="button">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+
+                    <a class="btn btn-outline-light btn-floating m-2 float-md-right footer-font-size" href="https://www.google.com/"
+                        role="button">
+                        <i class="fab fa-google"></i>
+                    </a>
+
+                    <a class="btn btn-outline-light btn-floating m-2 float-md-right footer-font-size" href="https://www.instagram.com/"
+                        role="button">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+</div>

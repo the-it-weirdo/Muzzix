@@ -1,0 +1,54 @@
+@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityUser>
+@{
+    ViewData["Title"] = "All Users";
+}
+@* for data table plugin *@
+<link href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet" />
+<section>
+    <h1 class="display-4">All Users</h1>
+    @if (Model.Any())
+    {
+        <table class="table table-bordered" id="genresTable">
+            <thead>
+                <tr>
+                    <th>Email</th>
+                    <th>User Name</th>
+                    @if (User.IsInRole(OnlineMusicStore.Models.UserRoles.AdminRole))
+                    {
+                        <th>Actions</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td>@user.Email</td>
+                        <td>@user.UserName</td>
+                        @if (User.IsInRole(OnlineMusicStore.Models.UserRoles.AdminRole))
+                        {
+                            <td>
+                                <a asp-controller="User" asp-action="Delete" asp-route-id="@user.Id">Delete</a>
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <!-- This is meaningless as there will always be one user -->
+        <p class="text-error">No Users available. Add a User to show.</p> 
+    }
+</section>
+
+@section Scripts {
+@* for data table *@
+<script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#genresTable').DataTable();
+    });
+</script>
+}

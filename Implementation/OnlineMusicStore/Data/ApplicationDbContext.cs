@@ -18,6 +18,10 @@ namespace OnlineMusicStore.Data
         public DbSet<Request> Requests { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<IdentityUser> AllUsers { get; set; }
+
+        public DbSet<CartItem> CartItems { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {

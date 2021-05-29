@@ -1,16 +1,70 @@
-﻿@model IEnumerable<OnlineMusicStore.Models.Music>
+﻿@model OnlineMusicStore.ViewModels.CartViewModel
+  
 @{
     ViewData["Title"] = "Cart";
 }
 
 <div class="text-center">
-    <h1 class="display-4">My Cart</h1>
+    <h1 class="display-4" style="font-size:50px">MY CART</h1>
 
-    @if(Model != null)
-    {
-        foreach(var music in Model)
+    @*@  @if (Model != null)
         {
-            <p>@music.Name has been added to Cart.</p>
-        }
+            foreach (var music in Model)
+            {
+                <p>@music.Name has been added to Cart.</p>
+            }
+        } *@
+
+    @if (Model.CartTotal == 0)
+    {
+                <h1 style="font-size:20px; color:darkblue">Your cart is empty, please add some Music.</h1>
     }
+    else
+    {
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Selected Quantity</th>
+                <th>Music</th>
+                <th class="text-right">Price</th>
+                <th class="text-right">Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var line in Model.Cart.CartItems)
+            {
+
+<tr>
+    <td class="text-center">
+        <a class="btn btn-success" asp-controller="Cart" asp-action="RemoveFromCart" asp-route-musicId="@line.Music.Id">
+            <i class="fas fa-shopping">-</i>
+        </a>
+        @line.Amount
+        <a class="btn btn-success" asp-controller="Cart" asp-action="AddMusicToCart" asp-route-musicId="@line.Music.Id"><i class="fas fa-cart-minus">+</i></a>
+
+    </td>
+    <td class="text-left">@line.Music.Name</td>
+    <td class="text-right">@line.Music.Price.ToString("c")</td>
+    <td class="text-right">
+        @((line.Amount * line.Music.Price).ToString("c"))
+    </td>
+</tr>}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-right">Total:</td>
+                <td class="text-right">
+                    @Model.CartTotal.ToString("c")
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <div class="text-center">
+        <a class="btn btn-primary" asp-controller="Cart" asp-action="ClearCart">Clear Cart</a>
+        <a class="btn btn-primary" asp-controller="Order" asp-action="CheckOut" asp-route-order="@Model.Order">Check Out</a>
+    </div>
+    }
+
 </div>

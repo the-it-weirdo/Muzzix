@@ -42,6 +42,10 @@ namespace OnlineMusicStore
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddErrorDescriber<CustomUserNameError>();
             services.AddControllersWithViews();
+            services.AddTransient<IOrderRepository, OrderRepository>();
+           services.AddScoped<Cart>(sp => Cart.GetCart(sp));
+
+
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -90,6 +94,8 @@ namespace OnlineMusicStore
                 options.ClientId = googleAuthNSection["ClientId"];
                 options.ClientSecret = googleAuthNSection["ClientSecret"];
             });
+
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -124,7 +130,7 @@ namespace OnlineMusicStore
             // });
 
             app.UseRouting();
-
+            app.UseSession();
             app.UseAuthentication();
             app.UseAuthorization();
 

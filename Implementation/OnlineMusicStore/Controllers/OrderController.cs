@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace OnlineMusicStore.Controllers
 {
+    [Authorize]
     public class OrderController : Controller
     {
         public IActionResult Index()
@@ -24,7 +25,6 @@ namespace OnlineMusicStore.Controllers
             _orderRepository = orderRepository;
             _Cart = Cart;
         }
-
 
        public IActionResult CheckOut()
         {

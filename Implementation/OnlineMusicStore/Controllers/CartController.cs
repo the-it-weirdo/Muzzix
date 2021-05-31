@@ -66,9 +66,13 @@ namespace OnlineMusicStore.Controllers
             if(albumId == null)
                 return NotFound();
 
-            var musics = _dbContext.Musics.ToList().Where(m => m.AlbumId == albumId).ToList();
+           var musics = _dbContext.Musics.ToList().Where(m => m.AlbumId == albumId).ToList();
 
-            return View("Index", musics);
+          foreach(var music in musics) {
+                _Cart.AddToCart(music, 1);
+            }
+
+          return RedirectToAction("Index");
         }
 
         public IActionResult RemoveFromCart(int musicId)

@@ -10,6 +10,7 @@ using OnlineMusicStore.Data;
 
 namespace OnlineMusicStore.Models
 {
+    
     public class Cart
     {
         private readonly ApplicationDbContext _appDbContext;
@@ -23,11 +24,6 @@ namespace OnlineMusicStore.Models
 
        public static Cart GetCart(IServiceProvider services)
         {
-            // Use GetRequiredService where you require the service. It will throw an exception,
-            // when the service is not registered.
-            // GetService on the other side is for optional dependencies, which will just return
-            // null when there is no such service registered.
-
             ISession session = services.GetRequiredService<IHttpContextAccessor>()?
                 .HttpContext.Session;
 
@@ -74,7 +70,7 @@ namespace OnlineMusicStore.Models
 
             if (CartItem != null)
             {
-                if (CartItem.Amount > 0)
+                if (CartItem.Amount > 1)
                 {
                     CartItem.Amount--;
                     localAmount = CartItem.Amount;

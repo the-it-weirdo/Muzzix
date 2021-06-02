@@ -9,6 +9,7 @@ namespace OnlineMusicStore.Models
     {
         public int CartItemId { get; set; }
 
+        public int MusicId { get; set; }
         public Music Music { get; set; }
 
         public double Amount { get; set; }

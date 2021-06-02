@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineMusicStore.Data;
 
 namespace OnlineMusicStore.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210602150854_DropStateFromOrders")]
+    partial class DropStateFromOrders
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -301,13 +303,12 @@ namespace OnlineMusicStore.Data.Migrations
                     b.Property<string>("CartId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("MusicId")
+                    b.Property<int?>("MusicId")
                         .HasColumnType("int");
 
                     b.HasKey("CartItemId");
 
-                    b.HasIndex("MusicId")
-                        .IsUnique();
+                    b.HasIndex("MusicId");
 
                     b.ToTable("CartItems");
                 });
@@ -555,10 +556,8 @@ namespace OnlineMusicStore.Data.Migrations
             modelBuilder.Entity("OnlineMusicStore.Models.CartItem", b =>
                 {
                     b.HasOne("OnlineMusicStore.Models.Music", "Music")
-                        .WithOne()
-                        .HasForeignKey("OnlineMusicStore.Models.CartItem", "MusicId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany()
+                        .HasForeignKey("MusicId");
 
                     b.Navigation("Music");
                 });

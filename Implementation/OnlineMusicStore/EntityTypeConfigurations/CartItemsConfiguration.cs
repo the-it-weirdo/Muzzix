@@ -8,7 +8,10 @@ namespace OnlineMusicStore.EntityTypeConfigurations
     {
         public void Configure(EntityTypeBuilder<CartItem> builder)
         {
-           
+            builder
+                 .HasOne(ci => ci.Music)
+                 .WithOne()
+                 .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

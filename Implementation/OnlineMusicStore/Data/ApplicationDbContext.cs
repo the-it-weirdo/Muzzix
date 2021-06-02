@@ -35,6 +35,7 @@ namespace OnlineMusicStore.Data
             builder.ApplyConfiguration(new AlbumConfiguration());
             builder.ApplyConfiguration(new ArtistcConfiguration());
             builder.ApplyConfiguration(new GenreConfiguration());
+            builder.ApplyConfiguration(new CartItemsConfiguration());
         }
     }
 }

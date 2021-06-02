@@ -22,6 +22,10 @@ namespace OnlineMusicStore.Data
         public DbSet<CartItem> CartItems { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
+
+
+        public DbSet<Address> Addresses { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
@@ -36,6 +40,7 @@ namespace OnlineMusicStore.Data
             builder.ApplyConfiguration(new ArtistcConfiguration());
             builder.ApplyConfiguration(new GenreConfiguration());
             builder.ApplyConfiguration(new CartItemsConfiguration());
+            builder.ApplyConfiguration(new AddressConfiguration());
         }
     }
 }

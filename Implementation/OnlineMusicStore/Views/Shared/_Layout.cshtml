@@ -10,13 +10,14 @@
     <link rel="stylesheet" href="~/css/carousel.css" />
     <!-- Font Awesome-->
     <script src="https://kit.fontawesome.com/6e2fa5513e.js" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
     @await Html.PartialAsync("_Header")
     <div class="container-fluid">
         <main role="main" class="p-3">
-            <div class="card rounded p-2 m-2 shadow-lg">
+            <div class="card rounded p-2 m-2 shadow">
                 <div class="card-body">
                     @RenderBody()
                 </div>

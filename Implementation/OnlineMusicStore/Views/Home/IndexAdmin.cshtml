@@ -4,21 +4,30 @@
 
 <h3>Admin Dashboard</h3>
 <hr />
+<style>
+    .btn-admin:hover {
+        background-color: #ffd800;
+        border: 2px solid #ffd800;
+    }
+    .btn-admin {
+        border: 2px solid black;
+    }
+</style>
 <div class="row">
     <!-- Music -->
-    <p class="col-sm-12"><span><i class="fas fa-music"></i> Music </span></p>
+    <p class="col-sm-12 font-resize"><span><i class="fas fa-music"></i> Music </span></p>
 </div>
 <div class="row">
     <div class="row mx-auto">
         <div class="col-sm-6">
             <!-- Create -->
-            <a class="btn btn-outline-info p-1 m-1 text-dark" asp-controller="Music" asp-action="CreateNew">
+            <a class="btn btn-outline btn-admin p-1 m-1" asp-controller="Music" asp-action="CreateNew">
                 <h5><i class="fas fa-plus-circle"></i> Add Music</h5>
             </a>
         </div>
         <div class="col-sm-6">
             <!-- Manage -->
-            <a class="btn btn-outline-info p-1 m-1 text-dark" asp-controller="Music" asp-action="Index">
+            <a class="btn btn-outline btn-admin p-1 m-1" asp-controller="Music" asp-action="Index">
                 <h5><i class="fas fa-database"></i> <i class="fas fa-music"></i> Manage Musics</h5>
             </a>
         </div>
@@ -27,19 +36,19 @@
 <hr />
 <div class="row">
     <!-- Artist -->
-    <p class="col-sm-12"><span><i class="fas fa-user"></i> Artist </span></p>
+    <p class="col-sm-12 font-resize"><span><i class="fas fa-user"></i> Artist </span></p>
 </div>
 <div class="row">
     <div class="row mx-auto">
         <div class="col-sm-6">
             <!-- Create -->
-            <a class="btn btn-outline-info p-1 m-1 text-dark" asp-controller="Artist" asp-action="CreateNew">
+            <a class="btn btn-outline btn-admin p-1 m-1 text-dark" asp-controller="Artist" asp-action="CreateNew">
                 <h5><i class="fas fa-plus-circle"></i> Add Artist</h5>
             </a>
         </div>
         <div class="col-sm-6">
             <!-- Manage -->
-            <a class="btn btn-outline-info p-1 m-1 text-dark" asp-controller="Artist" asp-action="Index">
+            <a class="btn btn-outline btn-admin p-1 m-1 text-dark" asp-controller="Artist" asp-action="Index">
                 <h5><i class="fas fa-database"></i> <i class="fas fa-user"></i> Manage Artists</h5>
             </a>
         </div>
@@ -48,19 +57,19 @@
 <hr />
 <div class="row">
     <!-- Album -->
-    <p class="col-sm-12"><span><i class="fas fa-record-vinyl"></i> Album </span></p>
+    <p class="col-sm-12 font-resize"><span><i class="fas fa-record-vinyl"></i> Album </span></p>
 </div>
 <div class="row">
     <div class="row mx-auto">
         <div class="col-sm-6">
             <!-- Create -->
-            <a class="btn btn-outline-info p-1 m-1 text-dark" asp-controller="Album" asp-action="CreateNew">
+            <a class="btn btn-outline btn-admin p-1 m-1 text-dark" asp-controller="Album" asp-action="CreateNew">
                 <h5><i class="fas fa-plus-circle"></i> Add Album</h5>
             </a>
         </div>
         <div class="col-sm-6">
             <!-- Manage -->
-            <a class="btn btn-outline-info p-1 m-1 text-dark" asp-controller="Album" asp-action="Index">
+            <a class="btn btn-outline btn-admin p-1 m-1 text-dark" asp-controller="Album" asp-action="Index">
                 <h5><i class="fas fa-database"></i> <i class="fas fa-record-vinyl"></i> Manage Albums</h5>
             </a>
         </div>
@@ -69,19 +78,19 @@
 <hr />
 <div class="row">
     <!-- Genre -->
-    <p class="col-sm-12"><span><i class="fas fa-tags"></i> Genre </span></p>
+    <p class="col-sm-12 font-resize"><span><i class="fas fa-tags"></i> Genre </span></p>
 </div>
 <div class="row">
     <div class="row mx-auto">
         <div class="col-sm-6">
             <!-- Create -->
-            <a class="btn btn-outline-info p-1 m-1 text-dark" asp-controller="Genre" asp-action="CreateNew">
+            <a class="btn btn-outline btn-admin p-1 m-1 text-dark" asp-controller="Genre" asp-action="CreateNew">
                 <h5><i class="fas fa-plus-circle"></i> Add Genre</h5>
             </a>
         </div>
         <div class="col-sm-6">
             <!-- Manage -->
-            <a class="btn btn-outline-info p-1 m-1 text-dark" asp-controller="Genre" asp-action="Index">
+            <a class="btn btn-outline btn-admin p-1 m-1 text-dark" asp-controller="Genre" asp-action="Index">
                 <h5><i class="fas fa-database"></i> <i class="fas fa-tags"></i> Manage Genres</h5>
             </a>
         </div>
@@ -90,19 +99,19 @@
 <hr />
 <div class="row">
     <!-- Requests & Feedbacks -->
-    <p class="col-sm-12"><span><i class="fas fa-table"></i> Requests & Feedbacks</span></p>
+    <p class="col-sm-12 font-resize"><span><i class="fas fa-table"></i> Requests & Feedbacks</span></p>
 </div>
 <div class="row">
     <div class="row mx-auto">
         <div class="col-sm-6">
             <!-- Create -->
-            <a class="btn btn-outline-info p-1 m-1 text-dark" asp-controller="Home" asp-action="ShowRequests">
+            <a class="btn btn-outline btn-admin p-1 m-1 text-dark" asp-controller="Home" asp-action="ShowRequests">
                 <h5><i class="fas fa-plus"></i> View Requests</h5>
             </a>
         </div>
         <div class="col-sm-6">
             <!-- Manage -->
-            <a class="btn btn-outline-info p-1 m-1 text-dark" asp-controller="Home" asp-action="ShowFeedbacks">
+            <a class="btn btn-outline btn-admin p-1 m-1 text-dark" asp-controller="Home" asp-action="ShowFeedbacks">
                 <h5><i class="fas fa-comments"></i> View Feedbacks</h5>
             </a>
         </div>
@@ -111,13 +120,13 @@
 <hr />
 <div class="row">
     <!-- All Users -->
-    <p class="col-sm-12"><span><i class="fas fa-table"></i> All Users</span></p>
+    <p class="col-sm-12 font-resize"><span><i class="fas fa-table"></i> All Users</span></p>
 </div>
 <div class="row">
     <div class="row mx-auto">
         <div class="col">
             <!-- Create -->
-            <a class="btn btn-outline-info p-1 m-1 text-dark" asp-controller="User" asp-action="Index">
+            <a class="btn btn-outline btn-admin p-1 m-1 text-dark" asp-controller="User" asp-action="Index">
                 <h5><i class="fas fa-database"></i> Manage Users</h5>
             </a>
         </div>

@@ -51,7 +51,7 @@ namespace OnlineMusicStore.Models
 
         private bool CheckRecent(DateTime initialTime)
         {
-            if ((DateTime.Now - initialTime).TotalDays <= 7)
+            if ((DateTime.Now - initialTime).TotalDays <= 35)
             {
                 return true;
             }

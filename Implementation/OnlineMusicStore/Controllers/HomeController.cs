@@ -36,7 +36,7 @@ namespace OnlineMusicStore.Controllers
             .Include(m => m.Artists)
             .Include(m => m.Album)
             .Include(m => m.Genre)
-            .OrderByDescending(m => m.DateAdded)
+            .OrderByDescending(m => m.DateReleased)
             .Take(3);
 
             _logger.LogInformation($"In Index: {recentMusicUrls.Count()}");

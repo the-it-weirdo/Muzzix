@@ -12,7 +12,7 @@ namespace OnlineMusicStore.ViewModels
 
         public IEnumerable<Music> Musics { get; set; }
 
-        public IEnumerable<Music> MusicsByLanguage { get; set; }
+        public IDictionary<string, List<Music>> MusicsByLanguage { get; set; }
 
         public IEnumerable<Artist> Artists { get; set; }
 

@@ -55,9 +55,12 @@
                         <span class="badge badge-pill badge-warning">New Release</span>
                     }
                 </p>
-                <p>
-                    <a class="btn color-purple" asp-controller="Cart" asp-action="AddMusicToCart" asp-route-musicId="@Model.Id"><i class="fas fa-cart-plus"></i>&nbsp;Add to Cart</a>
-                </p>
+                @if (!User.IsInRole(UserRoles.AdminRole))
+                {
+                    <p>
+                        <a class="btn color-purple" asp-controller="Cart" asp-action="AddMusicToCart" asp-route-musicId="@Model.Id"><i class="fas fa-cart-plus"></i>&nbsp;Add to Cart</a>
+                    </p>
+                }
             </div>
         </div>
         <div class="row">

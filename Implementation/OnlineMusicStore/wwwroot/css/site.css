@@ -76,3 +76,25 @@ body {
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 5rem;
 }
+
+.font-verdana {
+    font-family: Verdana;
+}
+
+.font-SagonaBook {
+    font-family: Sagona Book;
+    font-size: 28px;
+}
+
+.color-purple {
+    background-color: #880e4f;
+    color: white;
+}
+
+    .color-purple:hover {
+        color: #ffd800;
+    }
+
+.font-resize{
+    font-size: 26px;
+}

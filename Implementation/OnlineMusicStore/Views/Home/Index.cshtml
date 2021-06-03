@@ -22,6 +22,7 @@
     .carousel {
         margin-bottom: 4rem;
     }
+   
 </style>
 
 <section>
@@ -31,7 +32,7 @@
 @if (Model.Any())
 {
 
-    <h3>Checkout our most recent additions</h3>
+    <h3 class="font-verdana">Checkout Our Most Recent Additions</h3>
     @for (int i = 0; i < Model.Count; i++)
     {
         if (i == 0)
@@ -46,7 +47,7 @@
         {
             <div class="row featurette m-1">
                 <div class="col-md-7">
-                    <h2 class="featurette-heading">@Model[i].Name
+                    <h2 class="featurette-heading font-SagonaBook">@Model[i].Name
                     </h2>
                     <p class="lead">
                     <p><span class="text-muted">Genre: </span>@Model[i].Genre.Name</p>
@@ -72,12 +73,12 @@
                     }
                     <p>
                         <span class="badge">
-                            <a class="btn btn-secondary" asp-controller="Music" asp-action="Detail" asp-route-id="@Model[i].Id"
+                            <a class=" btn btn-outline-dark" asp-controller="Music" asp-action="Detail" asp-route-id="@Model[i].Id"
                     class="card-link">Check
                                 Details</a>
                         </span>
                         <span class="badge">
-                            <a class="btn btn-success" asp-controller="Cart" asp-action="AddMusicToCart"
+                            <a class="btn color-purple" asp-controller="Cart" asp-action="AddMusicToCart"
                     asp-route-musicId="@Model[i].Id"><i class="fas fa-cart-plus"></i>&nbsp;Add to Cart</a>
                         </span>
                     </p>
@@ -93,7 +94,7 @@
         {
             <div class="row featurette m-1">
                 <div class="col-md-7 order-md-2">
-                    <h2 class="featurette-heading">@Model[i].Name
+                    <h2 class="featurette-heading font-SagonaBook">@Model[i].Name
                     </h2>
                     <p class="lead">
                     <p><span class="text-muted">Genre: </span>@Model[i].Genre.Name</p>
@@ -119,12 +120,12 @@
                     }
                     <p>
                         <span class="badge">
-                            <a class="btn btn-secondary" asp-controller="Music" asp-action="Detail" asp-route-id="@Model[i].Id"
+                            <a class="btn btn-outline-dark" asp-controller="Music" asp-action="Detail" asp-route-id="@Model[i].Id"
                     class="card-link">Check
                                 Details</a>
                         </span>
                         <span class="badge">
-                            <a class="btn btn-success" asp-controller="Cart" asp-action="AddMusicToCart"
+                            <a class="btn color-purple" asp-controller="Cart" asp-action="AddMusicToCart"
                     asp-route-musicId="@Model[i].Id"><i class="fas fa-cart-plus"></i>&nbsp;Add to Cart</a>
                         </span>
                     </p>

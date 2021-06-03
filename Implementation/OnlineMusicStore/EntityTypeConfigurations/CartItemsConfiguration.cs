@@ -12,6 +12,10 @@ namespace OnlineMusicStore.EntityTypeConfigurations
                  .HasOne(ci => ci.Music)
                  .WithOne()
                  .OnDelete(DeleteBehavior.Cascade);
+
+            builder
+                .HasIndex(ci => ci.MusicId)
+                .IsUnique(false);
         }
     }
 }

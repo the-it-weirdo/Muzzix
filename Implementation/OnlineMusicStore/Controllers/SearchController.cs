@@ -31,10 +31,12 @@ namespace OnlineMusicStore.Controllers
         {
             _logger.LogInformation(language);
 
+            var musics = _repository.SearchByLanguage(language);
+
             return View("SearchResults", new SearchViewModel
             {
                 QueryString = language == "" ? "All Language" : $"Musics in {language}.",
-                MusicsByLanguage = _repository.SearchByLanguage(language)
+                MusicsByLanguage = musics
             });
         }
 

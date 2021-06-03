@@ -130,16 +130,20 @@
                         </h3>
                     </div>
                     <div id="collapseMusicByLanguage" class="collapse show" aria-labelledby="headingMusicByLanguage"
-                    data-parent="#accordion">
-                        <div class="card-body">
-                            @foreach (var music in Model.MusicsByLanguage)
+                         data-parent="#accordion">
+                        @foreach (var sets in Model.MusicsByLanguage)
+                        {
+                            <h5 class="m-2">@sets.Key</h5>
+                            <hr />
+                            @foreach (var music in sets.Value)
                             {
-                                <p>
-                                    <a asp-controller="Music" asp-action="Detail" asp-route-id="@music.Id">@music.Name
-                                        (@music.Language)</a>
+                                <p class="m-2">
+                                    <a asp-controller="Music" asp-action="Detail" asp-route-id="@music.Id">
+                                        @music.Name
+                                    </a>
                                 </p>
                             }
-                        </div>
+                        }
                     </div>
                 </div>
             </section>

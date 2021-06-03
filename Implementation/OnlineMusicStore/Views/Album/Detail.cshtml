@@ -13,10 +13,13 @@
             </div>
             <div class="col-md-10">
                 <h2 class="display-3">@Model.Name</h2>
-                <p class="m-1">
-                    <a class="btn color-purple" asp-controller="Cart" asp-action="AddAlbumToCart"
-                        asp-route-albumId="@Model.Id"><i class="fas fa-cart-plus"></i>&nbsp;Add to Cart</a>
-                </p>
+                @if (!User.IsInRole(UserRoles.AdminRole))
+                {
+                    <p class="m-1">
+                        <a class="btn color-purple" asp-controller="Cart" asp-action="AddAlbumToCart"
+                           asp-route-albumId="@Model.Id"><i class="fas fa-cart-plus"></i>&nbsp;Add to Cart</a>
+                    </p>
+                }
             </div>
         </div>
         <hr />

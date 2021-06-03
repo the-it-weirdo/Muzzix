@@ -40,6 +40,7 @@ namespace OnlineMusicStore.ViewModels
         //     this.Artists = new MultiSelectList(Artist, "Id", "Name");
         // }
 
+        [Display(Name = "Musics")]
         public List<int> SelectedMusicIds { get; set; }
 
         public AlbumFormViewModel()

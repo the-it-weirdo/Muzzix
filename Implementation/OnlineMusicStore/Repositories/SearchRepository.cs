@@ -49,7 +49,7 @@ namespace OnlineMusicStore.Repositories
             return genres;
         }
 
-        public List<Music> SearchByLanguage(string language = "")
+        public IDictionary<string, List<Music>> SearchByLanguage(string language = "")
         {
             var musics = _dbContext.Musics
             .Include(m => m.Artists)
@@ -61,7 +61,22 @@ namespace OnlineMusicStore.Repositories
 
             musics.Sort((music1, music2) => { return music1.DateReleased.CompareTo(music2.DateReleased); });
 
-            return musics;
+            Dictionary<string, List<Music>> byLanguage = new Dictionary<string, List<Music>>();
+
+            foreach (var music in musics)
+            {
+                List<Music> addedMusics = byLanguage.GetValueOrDefault(music.Language);
+                if (addedMusics == null)
+                {
+                    byLanguage.Add(music.Language, new List<Music>() { music });
+                }
+                else
+                {
+                    addedMusics.Add(music);
+                }
+            }
+
+            return byLanguage;
         }
 
         public List<Music> SearchByGenre(string genre = "")

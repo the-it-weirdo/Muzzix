@@ -50,10 +50,30 @@ namespace OnlineMusicStore.Controllers
         }
 
         [Authorize]
-        public async Task<IActionResult> RegistrationConfirm(string returnUrl = null)
+        public IActionResult RegistrationConfirm(string returnUrl = null)
         {
+            return RedirectToAction("AddAddress", new { returnUrl = returnUrl });
+        }
+
+        [Authorize]
+        public async Task<IActionResult> AddAddress(string returnUrl = null)
+        {
+            returnUrl = returnUrl ?? Url.Content("~/");
             var countries = await new CountryApiRepository().GetAllCountries();
             return View("AddressForm", new AddressFormViewModel(countries) { ReturnUrl = returnUrl });
+        }
+
+        [Authorize]
+        public async Task<IActionResult> EditAddress()
+        {
+            var countries = await new CountryApiRepository().GetAllCountries();
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return RedirectToPage("Login", "Identity");
+            }
+            var address = _dbContext.Addresses.FirstOrDefault(ad => ad.IdentityUserId == user.Id);
+            return View("AddressForm", new AddressFormViewModel(address, countries));
         }
 
         [Authorize]
@@ -68,18 +88,28 @@ namespace OnlineMusicStore.Controllers
                 Street = viewModel.Street,
                 ZIP = viewModel.ZIP,
                 City = viewModel.City,
+                State = viewModel.State,
                 Country = viewModel.Country,
             };
-            var user = await _userManager.GetUserAsync(User);
-            address.IdentityUserId = user?.Id;
+            address.IdentityUserId = _userManager.GetUserId(User);
 
 
-            _dbContext.Addresses.Add(address);
+            if (address.Id == 0)
+            {
+                _dbContext.Addresses.Add(address);
+            }
+            else
+            {
+                _dbContext.Addresses.Update(address);
+            }
 
             await _dbContext.SaveChangesAsync();
 
             if (viewModel.ReturnUrl != null && viewModel.ReturnUrl != "")
                 return LocalRedirect(viewModel.ReturnUrl);
+
+            if (viewModel.Title.Contains("Edit"))
+                return Redirect("~/Identity/Account/Manage/PersonalData");
             return RedirectToAction("Index", "Home");
         }
 

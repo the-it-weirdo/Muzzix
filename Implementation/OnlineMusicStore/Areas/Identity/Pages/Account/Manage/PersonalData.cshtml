@@ -1,0 +1,77 @@
+﻿@page
+@using OnlineMusicStore.Models
+@model PersonalDataModel
+@{
+    ViewData["Title"] = "Personal Data";
+    ViewData["ActivePage"] = ManageNavPages.PersonalData;
+}
+
+<h4>@ViewData["Title"]</h4>
+
+@if (User.IsInRole(UserRoles.AdminRole))
+{
+    <div class="alert alert-danger" role="alert">
+        <p><strong>Admin cannot delete account</strong></p>
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-12">
+            <p>Your account contains personal data that you have given us. This page allows you to download or delete that
+                data.</p>
+            <p>
+                <strong>Deleting this data will permanently remove your account, and this cannot be recovered.</strong>
+            </p>
+
+            @if (@Model.UserAddress != null)
+            {
+
+                <h4>Your Address</h4>
+                <a class="m-2" asp-action="EditAddress" asp-controller="User">Edit your address</a>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th scope="row">Street</th>
+                            <td>@Model.UserAddress.Street</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">City</th>
+                            <td>@Model.UserAddress.City</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">State</th>
+                            <td>@Model.UserAddress.State</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">ZIP</th>
+                            <td>@Model.UserAddress.ZIP</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Country</th>
+                            <td>@Model.UserAddress.Country</td>
+                        </tr>
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <a class="m-2" asp-action="AddAddress" asp-controller="User">Add an address.</a>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <form id="download-data" asp-page="DownloadPersonalData" method="post" class="form-group">
+                <button class="btn btn-primary" type="submit">Download</button>
+            </form>
+            <p>
+                <a id="delete" asp-page="DeletePersonalData" class="btn btn-secondary">Delete</a>
+            </p>
+        </div>
+    </div>
+
+}
+@section Scripts {
+<partial name="_ValidationScriptsPartial" />
+}

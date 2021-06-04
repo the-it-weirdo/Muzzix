@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -11,7 +9,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 
 namespace OnlineMusicStore.Areas.Identity.Pages.Account
@@ -47,7 +44,7 @@ namespace OnlineMusicStore.Areas.Identity.Pages.Account
         {
             [Required]
             [Display(Name = "User Name")]
-            [MinLength(3)]
+            [StringLength(50, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
             public string UserName { get; set; }
 
             [Required]
@@ -68,7 +65,8 @@ namespace OnlineMusicStore.Areas.Identity.Pages.Account
 
             [Required]
             [Display(Name = "Phone Number")]
-            [Phone]
+            [DataType(DataType.PhoneNumber)]
+            [RegularExpression(@"^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$", ErrorMessage = "Please provide a valid phone number.")]
             public string PhoneNumber { get; set; }
         }
 
@@ -90,27 +88,9 @@ namespace OnlineMusicStore.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    // Since we aren't implementing email verification
-                    // var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    // code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    // var callbackUrl = Url.Page(
-                    //     "/Account/ConfirmEmail",
-                    //     pageHandler: null,
-                    //     values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
-                    //     protocol: Request.Scheme);
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    return RedirectToAction("RegistrationConfirm", "User", new { returnUrl = returnUrl });
 
-                    // await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                    //     $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
-                    {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
-                    }
-                    else
-                    {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return RedirectToAction("RegistrationConfirm", "User", new { returnUrl = returnUrl });
-                    }
                 }
                 foreach (var error in result.Errors)
                 {

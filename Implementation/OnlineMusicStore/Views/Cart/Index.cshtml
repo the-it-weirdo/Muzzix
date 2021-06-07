@@ -37,17 +37,17 @@
 
 <tr>
     <td class="text-center">
-        <a class="btn btn-success" asp-controller="Cart" asp-action="RemoveFromCart" asp-route-musicId="@line.Music.Id">
+        <a class="btn btn-success" style="font-size:10px" asp-controller="Cart" asp-action="RemoveFromCart" asp-route-musicId="@line.Music.Id">
             <i class="fas fa-shopping">-</i>
         </a>
         @line.Amount
-        <a class="btn btn-success" asp-controller="Cart" asp-action="AddMusicToCart" asp-route-musicId="@line.Music.Id"><i class="fas fa-cart-minus">+</i></a>
+        <a class="btn btn-success" style="font-size:10px" asp-controller="Cart" asp-action="AddMusicToCart" asp-route-musicId="@line.Music.Id"><i class="fas fa-cart-minus">+</i></a>
 
     </td>
     <td class="text-left">@line.Music.Name</td>
-    <td class="text-right">@line.Music.Price.ToString("c")</td>
+    <td class="text-right"><i class="fas fa-rupee-sign"></i> @line.Music.Price</td>
     <td class="text-right">
-        @((line.Amount * line.Music.Price).ToString("c"))
+        <i class="fas fa-rupee-sign"></i> @((line.Amount * line.Music.Price))
     </td>
 </tr>}
         </tbody>
@@ -55,7 +55,7 @@
             <tr>
                 <td colspan="3" class="text-right">Total:</td>
                 <td class="text-right">
-                    @Model.CartTotal.ToString("c")
+                    <i class="fas fa-rupee-sign"></i> @Model.CartTotal
                 </td>
             </tr>
         </tfoot>

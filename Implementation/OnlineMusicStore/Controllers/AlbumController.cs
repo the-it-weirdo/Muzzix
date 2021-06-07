@@ -155,28 +155,8 @@ namespace OnlineMusicStore.Controllers
 
                 albumFromDb.Name = album.Name;
                 albumFromDb.ImageUrl = album.ImageUrl;
-
-                // For Musics
-                // If in db but not in form data, remove from db
-                foreach (var music in albumFromDb.Musics)
-                    if (!album.Musics.Contains(music))
-                        albumFromDb.Musics.Remove(music);
-
-                // If in form data, but not in db, add to db
-                foreach (var music in album.Musics)
-                    if (!albumFromDb.Musics.Contains(music))
-                        albumFromDb.Musics.Add(music);
-
-                // For Artists
-                // If in db but not in form data, remove from db
-                foreach (var artist in albumFromDb.Artists)
-                    if (!album.Artists.Contains(artist))
-                        albumFromDb.Artists.Remove(artist);
-
-                // If in form data, but not in db, add to db
-                foreach (var artist in album.Artists)
-                    if (!albumFromDb.Artists.Contains(artist))
-                        albumFromDb.Artists.Add(artist);
+                albumFromDb.Musics = album.Musics;
+                albumFromDb.Artists = album.Artists;
 
             }
             await _dbContext.SaveChangesAsync();

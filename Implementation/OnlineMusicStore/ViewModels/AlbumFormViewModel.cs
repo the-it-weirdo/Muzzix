@@ -33,20 +33,13 @@ namespace OnlineMusicStore.ViewModels
             this.Musics = new SelectList(Musics, "Id", "Name");
         }
 
-        // public MultiSelectList Artists { get; private set; }
-
-        // public void SetArtists(IEnumerable<Artist> Artist)
-        // {
-        //     this.Artists = new MultiSelectList(Artist, "Id", "Name");
-        // }
-
         [Display(Name = "Musics")]
+        [Required]
         public List<int> SelectedMusicIds { get; set; }
 
         public AlbumFormViewModel()
         {
             Id = 0;
-            // AlbumId = 0;
             SelectedMusicIds = new List<int>();
         }
 

@@ -33,6 +33,7 @@ namespace OnlineMusicStore.ViewModels
         public string ImageUrl { get; set; }
 
         [Display(Name = "Release Date")]
+        [Required]
         public DateTime DateReleased { get; set; }
 
         [Required]
@@ -54,13 +55,13 @@ namespace OnlineMusicStore.ViewModels
         }
 
         [Display(Name = "Artists")]
+        [Required]
         public List<int> SelectedArtistIds { get; set; }
 
 
         public MusicFormViewModel()
         {
             Id = 0;
-            // AlbumId = 0;
             SelectedArtistIds = new List<int>();
             DateReleased = DateTime.Now;
         }
@@ -75,7 +76,6 @@ namespace OnlineMusicStore.ViewModels
             GenreId = music.GenreId;
             Price = music.Price;
             SelectedArtistIds = music.Artists.Select(ar => ar.Id).ToList();
-            // AlbumId = music.AlbumId;
         }
 
         public Music MapToMusicObject()
@@ -94,23 +94,5 @@ namespace OnlineMusicStore.ViewModels
             };
             return music;
         }
-
-        // Maybe required later. Commented for reference. Please Do not remove.
-
-        // [Display(Name = "Album")]
-        // public int? AlbumId { get; set; }
-
-        // public List<SelectListItem> Albums { get; private set; }
-
-        // public void SetGenres(IEnumerable<Album> Albums)
-        // {
-        //     if (this.Albums == null)
-        //         this.Albums = new List<SelectListItem>();
-
-        //     foreach (var album in Albums)
-        //     {
-        //         this.Genres.Add(new SelectListItem { Value = genre.Id.ToString(), Text = genre.Name });
-        //     }
-        // }
     }
 }

@@ -8,13 +8,17 @@ Mini Project on ASP.NET Core MVC.
 ```
 root // Repository root
    |
-   |_Design // for all the designs made using paint or any other similar tool
+   |_Design // for all the designs and software documents
    |
    |_Database // for .mdf and .ldf files
+   |
+   |_Demo Assets backup // for demo image files
    |
    |_Implementation // Contains the Project root folder.
    | |
    | |_OnlineMusicStore // Project root folder
+   |
+   |_LICENSE // License file
    |
    |_README.md // this file.
 ```
@@ -61,3 +65,27 @@ dotnet tool install --global dotnet-ef
 - [Muskan Singhal](https://github.com/muskan3218)
 - [Akshat Kothiyal](https://github.com/KothiyalAkshat)
 
+### License
+```
+MIT License
+
+Copyright (c) 2021 Debaleen Das Spandan, Muskan Singhal, Ayushi Bhowmik, Akshat Kothiyal
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```

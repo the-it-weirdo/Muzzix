@@ -59,12 +59,43 @@ dotnet tool install --global dotnet-ef
 **N.B.: If you want to edit, please use ```vscode .``` inplace of ```dotnet run``` as the last command.**
 
 ---
+
+### Screenshots
+
+| Home Screen | Admin Dashboard |
+|-------------|-----------------|
+| ![Screenshot (1922)](https://user-images.githubusercontent.com/52004561/121697380-a091cd80-caea-11eb-85c8-49e91861e6aa.png) | ![Screenshot (1925)](https://user-images.githubusercontent.com/52004561/121697452-b56e6100-caea-11eb-8151-6968ef8906e7.png) | 
+
+| Product Management | Product Showcase |
+|--------------------|------------------|
+| ![Screenshot (1926)](https://user-images.githubusercontent.com/52004561/121697823-0f6f2680-caeb-11eb-927b-1439842b0854.png) | ![Screenshot (1927)](https://user-images.githubusercontent.com/52004561/121698429-9e7c3e80-caeb-11eb-9000-54dfc605ab47.png) |
+
+| Cart | Search Results |
+|------|----------------|
+| ![Screenshot (1928)](https://user-images.githubusercontent.com/52004561/121698622-cbc8ec80-caeb-11eb-9a28-415c20bff0aa.png) | ![Screenshot (1932)](https://user-images.githubusercontent.com/52004561/121698874-0fbbf180-caec-11eb-83a3-22cee8209195.png) |
+
+
+| Login | Register |
+|-------|----------|
+| ![Screenshot (1923)](https://user-images.githubusercontent.com/52004561/121697503-c28b5000-caea-11eb-86b2-03c8d882b039.png) | ![Screenshot (1924)](https://user-images.githubusercontent.com/52004561/121698485-af2cb480-caeb-11eb-8e13-75a2401ddcba.png) |
+
+| Music Form | Album Form |
+|------------|------------|
+| ![Screenshot (1933)](https://user-images.githubusercontent.com/52004561/121699715-cf10a800-caec-11eb-9a8a-1261ad54984a.png) | ![Screenshot (1934)](https://user-images.githubusercontent.com/52004561/121699760-d6d04c80-caec-11eb-9fc1-d97828b7558b.png) |
+
+
+| Contact Us | About Us |
+|------------|----------|
+| ![Screenshot (1935)](https://user-images.githubusercontent.com/52004561/121699788-de8ff100-caec-11eb-9ef6-829de62a2b46.png) | ![Screenshot (1936)](https://user-images.githubusercontent.com/52004561/121699807-e2bc0e80-caec-11eb-81c8-9f863fa68ec3.png) |
+
+---
 ### Collaborators
 - [Ayushi Bhowmik](https://github.com/ayushibhowmik)
 - [Debaleen Das Spandan](https://github.com/the-it-weirdo)
 - [Muskan Singhal](https://github.com/muskan3218)
 - [Akshat Kothiyal](https://github.com/KothiyalAkshat)
 
+---
 ### License
 ```
 MIT License
